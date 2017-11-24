@@ -33,8 +33,9 @@ void	ft_printf(const char *format, ...)
 				if (bt)
 				{
 					fmt = (t_printf_format *)(bt->content);
+					format += ft_strlen(fmt->format) - 1;
 					if (fmt->printfunc)
-						fmt->printfunc(&args);
+						fmt->printfunc(args);
 				}
 			}
 		}

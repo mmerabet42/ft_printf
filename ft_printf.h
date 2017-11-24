@@ -4,7 +4,7 @@
 #include "libft/libft.h"
 #include <stdarg.h>
 
-typedef void (*t_printfunc)(va_list *);
+typedef void (*t_printfunc)(va_list);
 
 typedef struct	s_printf_format
 {
