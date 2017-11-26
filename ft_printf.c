@@ -1,5 +1,5 @@
 #include "ft_printf.h"
-#include <stdio.h>
+#include "printf_handlers.h"
 
 static t_btree	*g_printf_formats = NULL;
 
@@ -11,13 +11,12 @@ static int formatcmp(const void *a, const void *b, size_t n)
 	return (ft_strncmp(fa->format, fb->format, ft_strlen(fa->format)));
 }
 
-void	ft_printf(const char *format, ...)
+void	ft_inner_printf(const char *format, va_list list)
 {
 	va_list			args;
 	t_btree			*bt;
 	t_printf_format	*fmt;
 
-	va_start(args, format);
 	while (*format)
 	{
 		if (*format == '%')
@@ -43,6 +42,22 @@ void	ft_printf(const char *format, ...)
 			ft_putchar(*format);
 		++format;
 	}
+}
+
+void	ft_printf(const char *format, ...)
+{
+	static int	firstcall;
+	va_list		args;
+
+	if (!firstcall)
+	{
+		ft_printf_add_format("s", handler_putstr);
+		ft_printf_add_format("d", handler_putnbr);
+		ft_printf_add_format("p", handler_putptr);
+		firstcall = 1;
+	}
+	va_start(args, format);
+	ft_inner_printf(format, args);
 	va_end(args);
 }
 
