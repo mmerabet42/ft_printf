@@ -2,17 +2,14 @@ NAME		=	libftprintf.a
 CC			=	gcc
 CFLAGS		=	-Wall -Werror -Wextra
 
-_OBJS		=	ft_printf.o \
-				printf_handlers.o \
+_SRCS		=	ft_printf.c \
+				printf_handlers.c \
 
 SRCS_DIR	=	.
-OBJS		=	$(patsubst %,$(SRCS_DIR)/%,$(_OBJS))
-SRCS		=	$(OBJS:.o=.c)
+SRCS		=	$(patsubst %,$(SRCS_DIR)/%,$(_SRCS))
+OBJS		=	$(SRCS:.c=.o)
 
-LIBFT_DIR	=	libft
-LIBFT_NAME	=	libft.a
-
-LIBFT		=	$(patsubst %,$(LIBFT_DIR)/%,$(LIBFT_NAME))
+LIBFT		=	libft
 
 # COLORS
 _GREY=\x1b[30m
@@ -26,26 +23,26 @@ _WHITE=\x1b[37m
 _END=\x1b[0m
 _SUCCESS=$(_GREEN)
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re $(LIBFT)
 
 all: $(NAME)
 
 $(NAME): $(LIBFT)
 	@echo "$(_RED)Compiling$(_END) $(NAME) $(_GREEN)...$(_END)"
-	@$(CC) $(CFLAGS) -o $(SRCS) -L$(LIBFT_DIR) -lft -I$(LIBFT_DIR)/includes
+	@$(CC) -c $(CFLAGS) $(SRCS) -I$(LIBFT)/includes
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
 	@echo  "$(NAME) : $(_SUCCESS)done$(_END)"
 
 $(LIBFT):
-	@make -C $(LIBFT_DIR)
+	@make -C $(LIBFT)
 
 clean:
 	@/bin/rm -f $(OBJS)
-	@make clean -C $(LIBFT_DIR)
+	@make clean -C $(LIBFT)
 
 fclean: clean
-	@/bin/rm -f $(NAME) 
-	@make fclean -C $(LIBFT_DIR)
+	@/bin/rm -f $(NAME)
+	@make fclean -C $(LIBFT)
 
 re: fclean all

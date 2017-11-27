@@ -11,12 +11,11 @@ static int formatcmp(const void *a, const void *b, size_t n)
 	return (ft_strncmp(fa->format, fb->format, ft_strlen(fa->format)));
 }
 
-void	ft_inner_printf(const char *format, va_list list)
+void	ft_inner_printf(const char *format, va_list args)
 {
-	va_list			args;
 	t_btree			*bt;
 	t_printf_format	*fmt;
-
+	
 	while (*format)
 	{
 		if (*format == '%')
@@ -65,12 +64,15 @@ int		ft_printf_add_format(const char *f, t_printfunc func)
 {
 	t_printf_format	format;
 	t_btree			*tmp;
+	size_t			szfmt;
 
+	szfmt = sizeof(t_printf_format);
 	format.format = (char *)f;
 	format.printfunc = func;
-	if (ft_btree_searchf(g_printf_formats, &format, sizeof(t_printf_format), formatcmp) == NULL)
+	if (!ft_btree_searchf(g_printf_formats, &format, szfmt, formatcmp))
 	{
-		tmp = ft_btree_insertf(g_printf_formats, ft_btree_new(&format, sizeof(t_printf_format)), formatcmp);
+		tmp = ft_btree_new(&format, szfmt);
+		tmp = ft_btree_insertf(g_printf_formats, tmp, formatcmp);
 		if (g_printf_formats == NULL)
 			g_printf_formats = tmp;
 		return (1);
