@@ -11,7 +11,7 @@ int main()
 	printf("|%010.5d|\n", -12);
 	printf("|%10.5d|\n", -12);
 	printf("|%-010.5d|\n", -12);*/
- ft_printf("|%+.5 10d|\n", 45);
-	printf("|%+.5 10d|\n", 45);
+ ft_printf("%s\bH\n", "Hello world");
+	printf("%s\bH\n", "Hello world");
 	return (0);
 }

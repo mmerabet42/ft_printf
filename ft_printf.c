@@ -40,9 +40,11 @@ static void	 ft_printf_parse(const char **format, va_list lst)
 		}
 		else if (*index == '.')
 		{
-			++index;
-			params.precision = ft_atoi(index);
-			index += ft_intlen(params.precision) - 1;
+			if (ft_isdigit(*++index))
+			{
+				params.precision = ft_atoi(index);
+				index += ft_intlen(params.precision) - 1;
+			}
 		}
 		else
 		{
