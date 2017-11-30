@@ -3,8 +3,9 @@
 
 #include "ft_printf.h"
 
-void handler_putstr(va_list lst, t_printf_params params);
-void handler_putnbr(va_list lst, t_printf_params params);
-void handler_putptr(va_list lst, t_printf_params params);
+char	*replace_width(char *str, t_printf_params params);
+char	*handler_putstr(va_list lst, t_printf_params params);
+char	*handler_putnbr(va_list lst, t_printf_params params);
+char	*handler_putptr(va_list lst, t_printf_params params);
 
 #endif

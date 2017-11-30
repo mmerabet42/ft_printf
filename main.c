@@ -11,7 +11,9 @@ int main()
 	printf("|%010.5d|\n", -12);
 	printf("|%10.5d|\n", -12);
 	printf("|%-010.5d|\n", -12);*/
- ft_printf("%s\bH\n", "Hello world");
-	printf("%s\bH\n", "Hello world");
+	int ftlen = ft_printf("'%d'\n", -10);
+	int len = printf("'%d'\n", -10);
+	
+	printf("my : %d - his : %d\n", ftlen, len);
 	return (0);
 }

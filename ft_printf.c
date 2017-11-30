@@ -1,5 +1,6 @@
 #include "ft_printf.h"
 #include "printf_handlers.h"
+#include <stdio.h>
 
 static t_btree	*g_printf_formats = NULL;
 
@@ -11,14 +12,16 @@ static int	formatcmp(const void *a, const void *b, size_t n)
 	return (ft_strncmp(fa->format, fb->format, ft_strlen(fa->format)));
 }
 
-static void	 ft_printf_parse(const char **format, va_list lst)
+static char	*ft_printf_parse(const char **format, va_list lst)
 {
 	char			*index;
+	char			*buffer;
 	t_btree			*bt;
 	t_printf_params	params;
 	t_printf_format	tmp;
 
 
+	buffer = NULL;
 	index = (char *)(*format);
 	ft_bzero(&params, sizeof(t_printf_params));
 	while (*index)
@@ -40,10 +43,20 @@ static void	 ft_printf_parse(const char **format, va_list lst)
 		}
 		else if (*index == '.')
 		{
+			params.precision_spec = 1;
 			if (ft_isdigit(*++index))
 			{
+				while (*index == '0')
+					++index;
+				if (!ft_isdigit(*index))
+					--index;
 				params.precision = ft_atoi(index);
 				index += ft_intlen(params.precision) - 1;
+			}
+			else
+			{
+				params.precision = 0;
+				--index;
 			}
 		}
 		else
@@ -53,45 +66,50 @@ static void	 ft_printf_parse(const char **format, va_list lst)
 			if (bt)
 			{
 				tmp = *((t_printf_format *)(bt->content));
-				index += ft_strlen(tmp.format) - 1;
 				params.format = tmp.format;
 				if (tmp.printfunc)
-					tmp.printfunc(lst, params);
+					buffer = tmp.printfunc(lst, params);
+				index += ft_strlen(tmp.format) - 1;
 			}
 			else
 			{
+				params.width = (params.width == 0 ? 0 : params.width - 1);
 				if (params.flags[MINUS_FLAG])
-					ft_putchar(*index);
-				ft_putnchar((params.flags[ZERO_FLAG] ? '0' : ' '),  params.width - 1);
+					buffer = ft_strjoinc_clr(buffer, *index);
+				buffer = ft_strjoin_clr(buffer, ft_memset(ft_strnew(params.width), ' ', params.width), 2);
+				ft_memset(buffer + (params.flags[MINUS_FLAG] ? 1 : 0), params.flags[ZERO_FLAG] && !params.flags[MINUS_FLAG] ? '0' : ' ', params.width);
 				if (!params.flags[MINUS_FLAG])
-					ft_putchar(*index);
+					buffer = ft_strjoinc_clr(buffer, *index);
 			}
 			break;
 		}
 		++index;
 	}
 	*format = index;
+	return (buffer);
 }
 
 static int	ft_inner_printf(const char *format, va_list args)
 {
-	int	len;
+	char	*buffer;
+	int		len;
 
+	buffer = NULL;
 	len = 0;
 	while (*format)
 	{
 		if (*format == '%')
 		{
 			++format;
-			ft_printf_parse(&format, args);
+			buffer = ft_strjoin_clr(buffer, ft_printf_parse(&format, args), 2);
 		}
 		else
-		{
-			++len;
-			ft_putchar(*format);
-		}
+			buffer = ft_strjoinc_clr(buffer, *format);
 		++format;
 	}
+	len = ft_strlen(buffer);
+	ft_putstr(buffer);
+	free(buffer);
 	return (len); 
 }
 
@@ -104,7 +122,6 @@ int			ft_printf(const char *format, ...)
 	{
 		ft_printf_add_format("s", handler_putstr);
 		ft_printf_add_format("d", handler_putnbr);
-		ft_printf_add_format("p", handler_putptr);
 	}
 	va_start(args, format);
 	len = ft_inner_printf(format, args);

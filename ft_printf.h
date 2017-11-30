@@ -15,10 +15,11 @@ typedef struct	s_printf_params
 	char		*format;
 	int			width;
 	int			precision;
+	int			precision_spec;
 	int			flags[5];
 }				t_printf_params;
 
-typedef void (*t_printfunc)(va_list, t_printf_params);
+typedef char *(*t_printfunc)(va_list, t_printf_params);
 
 typedef struct	s_printf_format
 {

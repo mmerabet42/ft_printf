@@ -3,7 +3,9 @@ CC			=	gcc
 CFLAGS		=	-Wall -Werror -Wextra
 
 _SRCS		=	ft_printf.c \
-				printf_handlers.c \
+				handler_putstr.c \
+				handler_putnbr.c \
+				replace_width.c \
 
 _LIBFTSRCS=	ft_abs.c \
 			ft_atod.c \
