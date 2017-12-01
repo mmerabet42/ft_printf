@@ -12,64 +12,81 @@ static int	formatcmp(const void *a, const void *b, size_t n)
 	return (ft_strncmp(fa->format, fb->format, ft_strlen(fa->format)));
 }
 
-static char	*ft_printf_parse(const char **format, va_list lst)
+static int	ft_is_flag(char c, t_printf_params *params)
 {
-	char			*index;
-	char			*buffer;
-	t_btree			*bt;
-	t_printf_params	params;
-	t_printf_format	tmp;
+	if (c == '#')
+		return (params->flags[HASH_FLAG] = 1);
+	else if (c == '+')
+		return (params->flags[PLUS_FLAG] = 1);
+	else if (c == '-')
+		return (params->flags[MINUS_FLAG] = 1);
+	else if (c == '0')
+		return (params->flags[ZERO_FLAG] = 1);
+	else if (c == ' ')
+		return (params->flags[SPACE_FLAG] = 1);
+	return (0);
+}
 
+static int	ft_is_precision(const char **index, t_printf_params *params)
+{
+	if (**index == '.')
+	{
+		params->precision_spec = 1;
+		if (ft_isdigit(*++(*index)))
+		{
+			params->precision = ft_atoi(*index);
+			while (ft_isdigit(**index))
+				++(*index);
+		}
+		else
+			params->precision = 0;
+		return (1);
+	}
+	return (0);
+}
+
+static t_printf_format	*ft_get_format(const char *format)
+{
+	t_printf_format	tmp;
+	t_btree			*bt;
+
+	tmp.format = (char *)format;
+	bt = ft_btree_searchf(g_printf_formats, &tmp, sizeof(t_printf_format), formatcmp);
+	if (bt)
+		return ((t_printf_format *)bt->content);
+	return (NULL);
+}
+
+static char	*ft_printf_parser(const char **format, va_list lst)
+{
+	const char		*index;
+	char			*buffer;
+	t_printf_params	params;
+	t_printf_format	*tmp;
 
 	buffer = NULL;
-	index = (char *)(*format);
+	index = *format;
 	ft_bzero(&params, sizeof(t_printf_params));
 	while (*index)
 	{
-		if (*index == '#')
-			params.flags[HASH_FLAG] = 1;
-		else if (*index == '+')
-			params.flags[PLUS_FLAG] = 1;
-		else if (*index == '-')
-			params.flags[MINUS_FLAG] = 1;
-		else if (*index == '0')
-			params.flags[ZERO_FLAG] = 1;
-		else if (*index == ' ')
-			params.flags[SPACE_FLAG] = 1;
+		if (ft_is_flag(*index, &params))
+			++index;
 		else if (ft_isdigit(*index))
 		{
 			params.width = ft_atoi(index);
-			index += ft_intlen(params.width) - 1;
+			while (ft_isdigit(*index))
+				++index;
 		}
-		else if (*index == '.')
-		{
-			params.precision_spec = 1;
-			if (ft_isdigit(*++index))
-			{
-				while (*index == '0')
-					++index;
-				if (!ft_isdigit(*index))
-					--index;
-				params.precision = ft_atoi(index);
-				index += ft_intlen(params.precision) - 1;
-			}
-			else
-			{
-				params.precision = 0;
-				--index;
-			}
-		}
+		else if (ft_is_precision(&index, &params))
+			;
 		else
 		{
-			tmp.format = (char *)index;
-			bt = ft_btree_searchf(g_printf_formats, &tmp, sizeof(t_printf_format), formatcmp);
-			if (bt)
+			printf("l: %s\n", index);
+			if ((tmp = ft_get_format(index)))
 			{
-				tmp = *((t_printf_format *)(bt->content));
-				params.format = tmp.format;
-				if (tmp.printfunc)
-					buffer = tmp.printfunc(lst, params);
-				index += ft_strlen(tmp.format) - 1;
+				if (tmp->printfunc)
+					buffer = tmp->printfunc(lst, params);
+				index += ft_strlen(tmp->format) - 1;
 			}
 			else
 			{
@@ -83,7 +100,6 @@ static char	*ft_printf_parse(const char **format, va_list lst)
 			}
 			break;
 		}
-		++index;
 	}
 	*format = index;
 	return (buffer);
@@ -101,7 +117,7 @@ static int	ft_inner_printf(const char *format, va_list args)
 		if (*format == '%')
 		{
 			++format;
-			buffer = ft_strjoin_clr(buffer, ft_printf_parse(&format, args), 2);
+			buffer = ft_strjoin_clr(buffer, ft_printf_parser(&format, args), 2);
 		}
 		else
 			buffer = ft_strjoinc_clr(buffer, *format);

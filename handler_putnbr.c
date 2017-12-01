@@ -1,4 +1,3 @@
-#include "ft_printf.h"
 #include "printf_handlers.h"
 
 static char	*handler_putnbr_flag(int n, int len, t_printf_params params)
@@ -17,18 +16,26 @@ static char	*handler_putnbr_flag(int n, int len, t_printf_params params)
 char	*handler_putnbr(va_list lst, t_printf_params params)
 {
 	int	nbr;
+	int	nlen;
 	int	len;
-	int	nblen;
+	int	neg;
+	char	*str;
+	char	*pos;
 
 	nbr = va_arg(lst, int);
-	nblen = ft_intlen(nbr) - (nbr < 0 ? 1 : 0);
-	nblen = params.precision - nblen;
-	nblen = (nblen < 0 ? 0 : nblen);
-	len = params.width - nblen - ft_intlen(nbr) - (nbr >= 0 && (params.flags[PLUS_FLAG] || params.flags[SPACE_FLAG]));
-	if (params.flags[MINUS_FLAG])
-		handler_putnbr_flag(nbr, nblen, params);
-	ft_putnchar((params.flags[ZERO_FLAG] && !params.flags[MINUS_FLAG] ? '0' : ' '), len < 0 ? 0 : len);
-	if (!params.flags[MINUS_FLAG])
-		handler_putnbr_flag(nbr, nblen, params);
-	return (NULL);
+	neg = (nbr < 0 ? 1 : 0);
+	nlen = ft_intlen(nbr);
+	len = params.precision - nlen;
+	len = (len < 0 ? 0 : len);
+	str = ft_itoa(nbr);
+	if (len > 0)
+		str = ft_strjoin_clr(ft_memset(ft_strnew(len),'0', len), str, 2);
+	str = replace_width(str, params);
+	if (neg && len > 0)
+	{
+		pos = ft_strchr(str, '-');
+		*pos = '0';
+	}
+	return (str);
+	return (handler_putnbr_flag(nbr, len, params));
 }
