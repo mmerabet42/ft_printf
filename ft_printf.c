@@ -57,7 +57,29 @@ static t_printf_format	*ft_get_format(const char *format)
 	return (NULL);
 }
 
-static char	*ft_printf_parser(const char **format, va_list lst)
+static char		*ft_handle_format(va_list *lst, const char **format, t_printf_params *params)
+{
+	char		*buffer;
+	t_printf_format	tmp;
+	t_btree		*bt;
+	
+	tmp.format = (char *)*format;
+	bt = ft_btree_searchf(g_printf_formats, &tmp, sizeof(t_printf_format), formatcmp);
+	if (bt)
+	{
+		tmp = *(t_printf_format *)bt->content;
+		if (tmp.printfunc)
+			buffer = tmp.printfunc(lst, params);
+		*format += ft_strlen(tmp.format);
+	}
+	else
+	{
+		
+	}
+	return (buffer);
+}
+
+static char		*ft_printf_parser(const char **format, va_list lst)
 {
 	const char		*index;
 	char			*buffer;
