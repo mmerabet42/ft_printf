@@ -5,7 +5,7 @@ CFLAGS		=	-Wall -Werror -Wextra
 _SRCS		=	ft_printf.c \
 				handler_putstr.c \
 				handler_putnbr.c \
-				replace_width.c \
+				perform_width.c \
 
 _LIBFTSRCS=	ft_abs.c \
 			ft_atod.c \
@@ -165,7 +165,10 @@ _LIBFTSRCS=	ft_abs.c \
 			ft_uintlen.c \
 			ft_uitoa.c \
 			ft_ullonglen.c \
-			ft_ulltoa.c
+			ft_ulonglen.c \
+			ft_ulltoa.c \
+			ft_ultoa.c \
+
 SRCS_DIR	=	.
 SRCS		=	$(patsubst %,$(SRCS_DIR)/%,$(_SRCS))
 OBJS		=	$(SRCS:.c=.o)

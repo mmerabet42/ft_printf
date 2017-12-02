@@ -12,5 +12,5 @@ char	*handler_putstr(va_list lst, t_printf_params params)
 	slen = ft_strlen(gs);
 	slen = (params.precision_spec && params.precision < slen ? params.precision : slen);
 	gs = ft_strndup(gs, slen);
-	return (replace_width(gs, params));
+	return (perform_width(gs, params));
 }

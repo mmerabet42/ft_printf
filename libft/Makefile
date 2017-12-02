@@ -160,7 +160,9 @@ _SRCS	=	ft_abs.c \
 			ft_uintlen.c \
 			ft_uitoa.c \
 			ft_ullonglen.c \
-			ft_ulltoa.c
+			ft_ulonglen.c \
+			ft_ulltoa.c \
+			ft_ultoa.c \
 
 SRCS_DIR=	.
 SRCS	=	$(patsubst %,$(SRCS_DIR)/%,$(_SRCS))

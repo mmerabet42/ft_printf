@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnstr_fd.c                                    :+:      :+:    :+:   */
+/*   ft_ultoa.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/23 22:24:34 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/02 21:26:53 by mmerabet         ###   ########.fr       */
+/*   Created: 2017/12/02 22:18:43 by mmerabet          #+#    #+#             */
+/*   Updated: 2017/12/02 22:19:37 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnstr_fd(const char *s, size_t n, int fd)
+char	*ft_ultoa(unsigned long n)
 {
-	size_t	i;
+	char	*str;
+	int		i;
 
-	i = 0;
-	while (s[i] && i < n)
-		ft_putchar_fd(s[i++], fd);
+	i = ft_ulonglen(n);
+	if ((str = ft_strnew(i)) == NULL)
+		return (NULL);
+	while (i > 0)
+	{
+		str[--i] = ft_abs((int)(n % 10)) + 48;
+		n /= 10;
+	}
+	return (str);
 }
