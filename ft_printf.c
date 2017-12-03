@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 20:27:32 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/03 15:34:30 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/03 22:36:35 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,11 @@ int				ft_printf(const char *format, ...)
 	{
 		ft_printf_add_format("s", handler_putstr);
 		ft_printf_add_format("d", handler_putnbr);
+		ft_printf_add_format("ld", handler_putnbrl);
+		ft_printf_add_format("lld", handler_putnbrll);
+		ft_printf_add_format("u", handler_putunbr);
+		ft_printf_add_format("lu", handler_putnbrl);
+		ft_printf_add_format("llu", handler_putnbrll);
 		ft_printf_add_format("p", handler_putptr);
 	}
 	va_start(args, format);

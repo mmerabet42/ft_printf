@@ -5,6 +5,9 @@ CFLAGS		=	-Wall -Werror -Wextra
 _SRCS		=	ft_printf.c \
 				handler_putstr.c \
 				handler_putnbr.c \
+				handler_putnbrl.c \
+				handler_putnbrll.c \
+				handler_putunbr.c \
 				handler_putptr.c \
 				perform_width.c \
 
