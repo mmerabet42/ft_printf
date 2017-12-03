@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoull.c                                        :+:      :+:    :+:   */
+/*   ft_atoul.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/13 14:05:31 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/03 14:00:56 by mmerabet         ###   ########.fr       */
+/*   Created: 2017/12/03 14:01:04 by mmerabet          #+#    #+#             */
+/*   Updated: 2017/12/03 14:01:27 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-unsigned long long	ft_atoull(const char *s)
+unsigned long	ft_atoul(const char *s)
 {
-	unsigned long long	nb;
+	unsigned long	nb;
 
 	if (!s)
 		return (0);

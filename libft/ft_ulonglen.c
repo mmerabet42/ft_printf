@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoull.c                                        :+:      :+:    :+:   */
+/*   ft_ulonglen.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/13 14:05:31 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/03 14:00:56 by mmerabet         ###   ########.fr       */
+/*   Created: 2017/12/03 13:37:31 by mmerabet          #+#    #+#             */
+/*   Updated: 2017/12/03 13:37:41 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-unsigned long long	ft_atoull(const char *s)
+int	ft_ulonglen(unsigned long n)
 {
-	unsigned long long	nb;
+	int	len;
 
-	if (!s)
-		return (0);
-	nb = 0;
-	while (ft_isspace(*s))
-		++s;
-	while (ft_isdigit(*s))
-		nb = nb * 10 + (*s++ - 48);
-	return (nb);
+	len = 1;
+	while (n /= 10)
+		++len;
+	return (len);
 }

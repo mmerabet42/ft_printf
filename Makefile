@@ -5,6 +5,7 @@ CFLAGS		=	-Wall -Werror -Wextra
 _SRCS		=	ft_printf.c \
 				handler_putstr.c \
 				handler_putnbr.c \
+				handler_putptr.c \
 				perform_width.c \
 
 _LIBFTSRCS=	ft_abs.c \
@@ -14,6 +15,7 @@ _LIBFTSRCS=	ft_abs.c \
 			ft_atol.c \
 			ft_atoll.c \
 			ft_atoui.c \
+			ft_atoul.c \
 			ft_atoull.c \
 			ft_btree_balance.c \
 			ft_btree_copy.c \
@@ -51,6 +53,11 @@ _LIBFTSRCS=	ft_abs.c \
 			ft_isupper.c \
 			ft_itoa.c \
 			ft_itoa_cbase.c \
+			ft_uitoa_cbase.c \
+			ft_ltoa_cbase.c \
+			ft_lltoa_cbase.c \
+			ft_ultoa_cbase.c \
+			ft_ulltoa_cbase.c \
 			ft_llonglen.c \
 			ft_lltoa.c \
 			ft_longlen.c \

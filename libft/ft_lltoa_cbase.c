@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
+/*   ft_lltoa_cbase.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/11 16:40:21 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/03 13:48:04 by mmerabet         ###   ########.fr       */
+/*   Created: 2017/12/03 13:33:10 by mmerabet          #+#    #+#             */
+/*   Updated: 2017/12/03 13:58:40 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_itoa_cbase(int n, const char *base)
+char	*ft_lltoa_cbase(long long n, const char *base)
 {
-	char	*str;
-	int		baselen;
-	int		i;
-	int		nc;
-	int		isneg;
+	char		*str;
+	int			baselen;
+	int			i;
+	long long	nc;
+	int			isneg;
 
 	if (!base)
 		return (NULL);

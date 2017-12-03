@@ -9,6 +9,7 @@ _SRCS	=	ft_abs.c \
 			ft_atol.c \
 			ft_atoll.c \
 			ft_atoui.c \
+			ft_atoul.c \
 			ft_atoull.c \
 			ft_btree_balance.c \
 			ft_btree_copy.c \
@@ -46,6 +47,11 @@ _SRCS	=	ft_abs.c \
 			ft_isupper.c \
 			ft_itoa.c \
 			ft_itoa_cbase.c \
+			ft_uitoa_cbase.c \
+			ft_ltoa_cbase.c \
+			ft_lltoa_cbase.c \
+			ft_ultoa_cbase.c \
+			ft_ulltoa_cbase.c \
 			ft_llonglen.c \
 			ft_lltoa.c \
 			ft_longlen.c \
@@ -167,6 +173,7 @@ _SRCS	=	ft_abs.c \
 SRCS_DIR=	.
 SRCS	=	$(patsubst %,$(SRCS_DIR)/%,$(_SRCS))
 OBJS	=	$(SRCS:.c=.o)
+INCLUDE	=	includes
 
 # COLORS
 _GREY=\x1b[30m
@@ -191,7 +198,7 @@ $(NAME): compile
 
 compile:
 	@echo "$(_RED)Compiling$(_END) : $(NAME) $(_SUCCESS)...$(_END)"
-	@$(CC) $(CFLAGS) -c $(SRCS)
+	@$(CC) $(CFLAGS) -c $(SRCS) -I$(INCLUDES)
 
 clean:
 	@/bin/rm -f $(OBJS)

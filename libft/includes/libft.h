@@ -6,13 +6,14 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 14:00:22 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/02 22:21:22 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/03 14:00:41 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LIBFT_H
 # define FT_LIBFT_H
-# define FT_HEX "0123456789ABCDEF"
+# define FT_HEXM "0123456789ABCDEF"
+# define FT_HEX "0123456789abcdef"
 # define FT_BIN "01"
 # define FT_OCT "01234567"
 # define FT_DEC "0123456789"
@@ -109,6 +110,7 @@ int					ft_atoi(const char *s);
 long				ft_atol(const char *s);
 long long			ft_atoll(const char *s);
 unsigned int		ft_atoui(const char *s);
+unsigned long		ft_atoul(const char *s);
 unsigned long long	ft_atoull(const char *s);
 double				ft_atod(const char *s);
 int					ft_atoi_base(const char *s, const char *base);
@@ -121,6 +123,11 @@ char				*ft_ultoa(unsigned long n);
 char				*ft_ulltoa(unsigned long long n);
 char				*ft_dtoa(double n, int precision);
 char				*ft_itoa_cbase(int n, const char *base);
+char				*ft_uitoa_cbase(unsigned int n, const char *base);
+char				*ft_ltoa_cbase(long n, const char *base);
+char				*ft_ultoa_cbase(unsigned long n, const char *base);
+char				*ft_lltoa_cbase(long long n, const char *base);
+char				*ft_ulltoa_cbase(unsigned long long n, const char *base);
 char				*ft_tobase(const char *s,
 							char *fbase,
 							char *tbase);
@@ -222,7 +229,7 @@ int					ft_intlen(int n);
 int					ft_longlen(long n);
 int					ft_llonglen(long long n);
 int					ft_uintlen(unsigned int n);
-int					ft_longlen(unsigned long n);
+int					ft_ulonglen(unsigned long n);
 int					ft_ullonglen(unsigned long long n);
 int					ft_abs(int n);
 int					ft_pow(int x, int y);
