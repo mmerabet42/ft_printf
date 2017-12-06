@@ -9,6 +9,13 @@
 # define HASH_FLAG 2
 # define ZERO_FLAG 3
 # define SPACE_FLAG 4
+# define L_MOD 5
+# define LL_MOD 6
+# define H_MOD 7
+# define HH_MOD 8
+# define J_MOD 9
+# define T_MOD 10
+# define Z_MOD 11
 
 typedef struct	s_printf_params
 {
@@ -16,7 +23,7 @@ typedef struct	s_printf_params
 	int			width;
 	int			precision;
 	int			precision_spec;
-	int			flags[5];
+	int			flags[12];
 }				t_printf_params;
 
 typedef char *(*t_printfunc)(va_list, t_printf_params);

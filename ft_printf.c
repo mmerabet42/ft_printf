@@ -6,12 +6,12 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 20:27:32 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/03 22:36:35 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/06 22:45:59 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "printf_handlers.h"
+#include "handlers.h"
 
 static t_btree	*g_printf_formats = NULL;
 
@@ -56,6 +56,41 @@ static int		ft_is_precision(const char **index, t_printf_params *params)
 	return (0);
 }
 
+static int		ft_is_modifier(const char **index, t_printf_params *params)
+{
+	if (ft_strnequ("ll", *index, 2))
+	{
+		*index += 2;
+		return (params->flags[LL_MOD] = 1);
+	}
+	else if (ft_strnequ("l", *index, 1))
+	{
+		++(*index);
+		return (params->flags[L_MOD] = 1);
+	}
+	else if (ft_strnequ("hh", *index, 2))
+	{
+		*index += 2;
+		return (params->flags[HH_MOD] = 1);
+	}
+	else if (ft_strnequ("h", *index, 1))
+	{
+		++(*index);
+		return (params->flags[H_MOD] = 1);
+	}
+	else if (ft_strnequ("j", *index, 1))
+	{
+		++(*index);
+		return (params->flags[J_MOD] = 1);
+	}
+	else if (ft_strnequ("z", *index, 1))
+	{
+		++(*index);
+		return (params->flags[Z_MOD] = 1);
+	}
+	return (0);
+}
+
 static char		*ft_handle_format(va_list lst, const char **format, t_printf_params params)
 {
 	char		*buffer;
@@ -96,6 +131,8 @@ static char		*ft_printf_parser(const char **format, va_list lst)
 		}
 		else if (ft_is_precision(format, &params))
 			;
+		else if (ft_is_modifier(format, &params))
+			;
 		else
 			return (ft_handle_format(lst, format, params));
 	}
@@ -114,10 +151,7 @@ static int		ft_inner_printf(const char *format, va_list args)
 		if (*format == '%')
 			buffer = ft_strjoin_clr(buffer, ft_printf_parser(&format, args), 2);
 		else
-		{
-			buffer = ft_strjoinc_clr(buffer, *format);
-			++format;
-		}
+			buffer = ft_strjoinc_clr(buffer, *format++);
 	}
 	len = ft_strlen(buffer);
 	ft_putstr(buffer);
@@ -132,14 +166,12 @@ int				ft_printf(const char *format, ...)
 
 	if (g_printf_formats == NULL)
 	{
-		ft_printf_add_format("s", handler_putstr);
-		ft_printf_add_format("d", handler_putnbr);
-		ft_printf_add_format("ld", handler_putnbrl);
-		ft_printf_add_format("lld", handler_putnbrll);
-		ft_printf_add_format("u", handler_putunbr);
-		ft_printf_add_format("lu", handler_putnbrl);
-		ft_printf_add_format("llu", handler_putnbrll);
-		ft_printf_add_format("p", handler_putptr);
+		ft_printf_add_format("s", handler_s);
+		ft_printf_add_format("d", handler_d);
+		ft_printf_add_format("u", handler_u);
+		ft_printf_add_format("lu", handler_lu);
+		ft_printf_add_format("llu", handler_llu);
+		ft_printf_add_format("p", handler_p);
 	}
 	va_start(args, format);
 	len = ft_inner_printf(format, args);

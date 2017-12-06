@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handler_putunbr.c                                  :+:      :+:    :+:   */
+/*   handler_putptr.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/03 22:24:32 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/03 22:36:11 by mmerabet         ###   ########.fr       */
+/*   Created: 2017/12/02 22:12:58 by mmerabet          #+#    #+#             */
+/*   Updated: 2017/12/06 21:45:13 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf_handlers.h"
+#include "handlers.h"
 
 static char *padzero(char *str, t_printf_params *params)
 {
@@ -32,17 +32,13 @@ static char *padzero(char *str, t_printf_params *params)
 	return (ft_strjoin_clr(zstr, str, 2));
 }
 
-char	*handler_putunbr(va_list lst, t_printf_params params)
+char	*handler_p(va_list lst, t_printf_params params)
 {
-	unsigned int	nbr;
-	char			*str;
+	char	*str;
+	void	*ptr;
 
-	nbr = va_arg(lst, unsigned int);
-	str = ft_uitoa(nbr);
+	ptr = va_arg(lst, void *);
+	str = ft_ulltoa_cbase((unsigned long long)ptr, FT_HEX);
 	str = padzero(str, &params);
-	if (params.flags[PLUS_FLAG])
-		str = ft_strjoincs_clr('+', str);
-	else if (params.flags[SPACE_FLAG])
-		str = ft_strjoincs_clr('-', str);
-	return (perform_width(str, params));
+	return (perform_width(ft_strjoin_clr("0x", str, 1), params));
 }

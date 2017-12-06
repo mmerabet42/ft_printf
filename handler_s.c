@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   replace_width.c                                    :+:      :+:    :+:   */
+/*   handler_s.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/30 21:59:21 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/04 20:57:20 by mmerabet         ###   ########.fr       */
+/*   Created: 2017/12/04 20:56:04 by mmerabet          #+#    #+#             */
+/*   Updated: 2017/12/06 21:12:07 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "handlers.h"
 
-char	*perform_width(char *str, t_printf_params params)
+char	*handler_s(va_list lst, t_printf_params params)
 {
-	char	*s;
-	int		len;
+	char	*gs;
+	int		slen;
 
-	len = params.width - ft_strlen(str);
-	len = (len < 0 ? 0 : len);
-	s = ft_memset(ft_strnew(len), ' ', len);
-	if (params.flags[ZERO_FLAG] && !params.flags[MINUS_FLAG])
-		ft_memset(s, '0', len);
-	if (params.flags[MINUS_FLAG])
-		s = ft_strjoin_clr(str, s, 2);
-	else
-		s = ft_strjoin_clr(s, str, 2);
-	return (s);
+	gs = va_arg(lst, char *);
+	if (!gs)
+		gs = "(null)";
+	slen = ft_strlen(gs);
+	slen = (params.precision_spec && params.precision < slen ? params.precision : slen);
+	gs = ft_strndup(gs, slen);
+	return (perform_width(gs, params));
 }

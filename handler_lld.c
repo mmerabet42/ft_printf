@@ -6,11 +6,11 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/03 22:05:52 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/03 22:23:44 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/04 22:17:51 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf_handlers.h"
+#include "handlers.h"
 
 static char	*handler_putnbr_flag(char *s, long long n, int l,
 		t_printf_params params)
@@ -35,7 +35,7 @@ static char	*handler_putnbr_flag(char *s, long long n, int l,
 	return (s);
 }
 
-char		*handler_putnbrll(va_list lst, t_printf_params params)
+char		*handler_lld(va_list lst, t_printf_params params)
 {
 	long long	nbr;
 	int			len;

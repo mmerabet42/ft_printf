@@ -3,12 +3,14 @@ CC			=	gcc
 CFLAGS		=	-Wall -Werror -Wextra
 
 _SRCS		=	ft_printf.c \
-				handler_putstr.c \
-				handler_putnbr.c \
-				handler_putnbrl.c \
-				handler_putnbrll.c \
-				handler_putunbr.c \
-				handler_putptr.c \
+				handler_s.c \
+				handler_d.c \
+				handler_ld.c \
+				handler_lld.c \
+				handler_u.c \
+				handler_lu.c \
+				handler_llu.c \
+				handler_p.c \
 				perform_width.c \
 
 _LIBFTSRCS=	ft_abs.c \
@@ -190,7 +192,7 @@ LIBFTOBJS	=	$(LIBFTSRCS:.c=.o)
 
 # COLORS
 _GREY=\x1b[30m
-_RED=\x1b[31m
+_RED=\x1b[38;5;220m
 _GREEN=\x1b[32m
 _YELLOW=\x1b[33m
 _BLUE=\x1b[34m
@@ -198,14 +200,14 @@ _PURPLE=\x1b[35m
 _CYAN=\x1b[36m
 _WHITE=\x1b[37m
 _END=\x1b[0m
-_SUCCESS=$(_GREEN)
+_SUCCESS=$(_RED)
 
 .PHONY: all clean fclean re $(LIBFT)
 
 all: $(NAME)
 
 $(NAME):
-	@echo "$(_RED)Compiling$(_END) $(NAME) $(_GREEN)...$(_END)"
+	@echo "$(_RED)Compiling$(_END) $(NAME) $(_RED)...$(_END)"
 	@$(CC) -c $(CFLAGS) $(SRCS) $(LIBFTSRCS) -I$(LIBFT)/includes
 	@mv $(_LIBFTOBJS) $(LIBFT)/
 	@ar rc $(NAME) $(OBJS) $(LIBFTOBJS)
@@ -213,10 +215,12 @@ $(NAME):
 	@echo  "$(NAME) : $(_SUCCESS)done$(_END)"
 
 clean:
+	@echo "$(_RED)Cleaning$(_END) : object files"
 	@/bin/rm -f $(OBJS)
 	@/bin/rm -f $(LIBFTOBJS)
 
 fclean: clean
+	@echo "$(_RED)Cleaning$(_END) : $(NAME)"
 	@/bin/rm -f $(NAME)
 
 re: fclean all

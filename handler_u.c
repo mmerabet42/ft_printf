@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handler_putunbrl.c                                 :+:      :+:    :+:   */
+/*   handler_putunbr.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/03 22:36:19 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/03 22:36:32 by mmerabet         ###   ########.fr       */
+/*   Created: 2017/12/03 22:24:32 by mmerabet          #+#    #+#             */
+/*   Updated: 2017/12/06 21:37:24 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf_handlers.h"
-
+#include "handlers.h"
+#include <stdio.h>
 static char *padzero(char *str, t_printf_params *params)
 {
 	int		len;
@@ -25,21 +25,18 @@ static char *padzero(char *str, t_printf_params *params)
 		params->flags[ZERO_FLAG] = 0;
 		zeroes = params->precision - len;
 	}
-	else if (params->flags[ZERO_FLAG])
-		zeroes = params->width - 2 - len;
 	zeroes = (zeroes < 0 ? 0 : zeroes);
-	zstr = (char *)ft_memset(ft_memalloc(zeroes + 1), '0', zeroes);
+	zstr = (char *)ft_memset(ft_strnew(zeroes), '0', zeroes);
 	return (ft_strjoin_clr(zstr, str, 2));
 }
 
-char	*handler_putunbr(va_list lst, t_printf_params params)
+char	*handler_u(va_list lst, t_printf_params params)
 {
-	unsigned long	nbr;
+	unsigned int	nbr;
 	char			*str;
 
-	nbr = va_arg(lst, unsigned long);
-	str = ft_uitoa(nbr);
-	str = padzero(str, &params);
+	nbr = va_arg(lst, unsigned int);
+	str = padzero(ft_uitoa(nbr), &params);
 	if (params.flags[PLUS_FLAG])
 		str = ft_strjoincs_clr('+', str);
 	else if (params.flags[SPACE_FLAG])

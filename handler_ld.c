@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handler_putnbr.c                                   :+:      :+:    :+:   */
+/*   handler_putnbrl.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/02 20:26:52 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/03 21:48:49 by mmerabet         ###   ########.fr       */
+/*   Created: 2017/12/03 21:48:56 by mmerabet          #+#    #+#             */
+/*   Updated: 2017/12/04 22:17:39 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf_handlers.h"
+#include "handlers.h"
 
-static char	*handler_putnbr_flag(char *s, int n, int l, t_printf_params params)
+static char	*handler_putnbr_flag(char *s, long n, int l, t_printf_params params)
 {
 	char	adder;
 
@@ -34,16 +34,16 @@ static char	*handler_putnbr_flag(char *s, int n, int l, t_printf_params params)
 	return (s);
 }
 
-char		*handler_putnbr(va_list lst, t_printf_params params)
+char		*handler_ld(va_list lst, t_printf_params params)
 {
-	int		nbr;
+	long	nbr;
 	int		len;
 	char	*str;
 
-	nbr = va_arg(lst, int);
-	len = ft_intlen(nbr);
+	nbr = va_arg(lst, long);
+	len = ft_longlen(nbr);
 	len = (params.precision > len ? params.precision - len : 0);
-	str = ft_itoa(nbr);
+	str = ft_ltoa(nbr);
 	if (len > 0)
 		str = ft_strjoin_clr(ft_memset(ft_strnew(len), '0', len), str, 2);
 	if (nbr < 0 && len > 0)
