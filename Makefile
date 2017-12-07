@@ -9,6 +9,7 @@ _SRCS		=	ft_printf.c \
 				handler_p.c \
 				handler_x.c \
 				handler_o.c \
+				handler_c.c \
 				perform_width.c \
 				pad_zeroes.c \
 				proper_cast.c \

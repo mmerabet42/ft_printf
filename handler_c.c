@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handler_putunbr.c                                  :+:      :+:    :+:   */
+/*   handler_c.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/03 22:24:32 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/07 21:32:32 by mmerabet         ###   ########.fr       */
+/*   Created: 2017/12/07 22:30:13 by mmerabet          #+#    #+#             */
+/*   Updated: 2017/12/07 22:39:27 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "handlers.h"
 
-char	*handler_u(va_list lst, t_printf_params params)
+char	*handler_c(va_list lst, t_printf_params params)
 {
-	unsigned long long	n;
+	char	*str;
+	char	c;
 
-	n = proper_cast_u(lst, params);
-	return (perform_width(pad_zeroes(ft_ulltoa(n), &params), params));
-}
-
-char		*handler_u_m(va_list lst, t_printf_params params)
-{
-	params.flags[LL_MOD] = 0;
-	params.flags[L_MOD] = 1;
-	return (handler_u(lst, params));
+	c = (char)va_arg(lst, int);
+	str = ft_strnew(1);
+	str[0] = c;
+	return (perform_width(str, params));
 }

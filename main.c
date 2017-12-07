@@ -11,11 +11,11 @@ int main()
 	printf("|%010.5d|\n", -12);
 	printf("|%10.5d|\n", -12);
 	printf("|%-010.5d|\n", -12);*/
-	char *frmt = "'%0+5d'\n";
-	int t = 42;
+	char *frmt = "'%c'\n";
+	char t = '\0';
 int ftlen = ft_printf(frmt, t);
 	 int len = printf(frmt, t);
-	
-	printf("my : %d - his : %d\n", ftlen, len);
+
+	//printf("my : %d - his : %d\n", ftlen, len);
 	return (0);
 }

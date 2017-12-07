@@ -6,12 +6,12 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 20:26:52 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/07 19:24:31 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/07 22:03:10 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "handlers.h"
-#include <stdio.h>
+
 static char	*handler_flag(char *s, int n, int l, t_printf_params params)
 {
 	char	adder;
@@ -23,9 +23,11 @@ static char	*handler_flag(char *s, int n, int l, t_printf_params params)
 		adder = '+';
 	else if (params.flags[SPACE_FLAG] && n >= 0)
 		adder = ' ';
-	if (n < 0 || params.flags[PLUS_FLAG] || params.flags[SPACE_FLAG])
-		params.width -= 1;
+	if (adder && adder != '-')
+		--params.width;
 	s = pad_zeroes(s, &params);
+	if (adder && adder != '-')
+		++params.width;
 	if (adder && ((n < 0 && params.precision >= l) || n >= 0))
 		s = ft_strjoincs_clr(adder, s);
 	s = perform_width(s, params);
@@ -43,8 +45,11 @@ char		*handler_d(va_list lst, t_printf_params params)
 	int			len;
 	char		*str;
 
-	n = proper_cast((long long)va_arg(lst, long long), params);
-	str = ft_lltoa(n);
+	n = proper_cast(lst, params);
+	if (params.precision_spec && params.precision == 0 && n == 0)
+		str = ft_strnew(0);
+	else
+		str = ft_lltoa(n);
 	len = ft_strlen(str);
 	if (n < 0 && len <= params.precision)
 		str[0] = '0';

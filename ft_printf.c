@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 20:27:32 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/07 19:24:36 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/07 22:43:25 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ static int		ft_inner_printf(const char *format, va_list args)
 	char	*buffer;
 	int		len;
 
-	buffer = NULL;
+	buffer = ft_strdup("");
 	len = 0;
 	while (*format)
 	{
@@ -177,6 +177,7 @@ int				ft_printf(const char *format, ...)
 		ft_printf_add_format("X", handler_x_m);
 		ft_printf_add_format("o", handler_o);
 		ft_printf_add_format("O", handler_o_m);
+		ft_printf_add_format("c", handler_c);
 	}
 	va_start(args, format);
 	len = ft_inner_printf(format, args);

@@ -6,42 +6,46 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 16:48:04 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/07 19:07:00 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/07 21:59:21 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "handlers.h"
 
-long long			proper_cast(long long n, t_printf_params params)
+long long			proper_cast(va_list lst, t_printf_params params)
 {
 	if (params.flags[J_MOD])
-		n = (long long)((intmax_t)n);
+		return ((long long)va_arg(lst, intmax_t));
+	else if (params.flags[Z_MOD])
+		return ((long long)va_arg(lst, size_t));
 	else if (params.flags[LL_MOD])
-		n = (long long)n;
+		return ((long long)va_arg(lst, long long));
 	else if (params.flags[L_MOD])
-		n = (long long)((long)n);
+		return ((long long)va_arg(lst, long));
 	else if (params.flags[H_MOD])
-		n = (long long)((short)n);
+		return ((long long)((short)va_arg(lst, int)));
 	else if (params.flags[HH_MOD])
-		n = (long long)((char)n);
-	else
-		n = (long long)((int)n);
-	return (n);
+		return ((long long)((char)va_arg(lst, int)));
+	return ((long long)va_arg(lst, int));
 }
 
-unsigned long long	proper_cast_u(unsigned long long n, t_printf_params params)
+unsigned long long	proper_cast_u(va_list lst, t_printf_params params)
 {
+	unsigned int	n;
+
 	if (params.flags[J_MOD])
-		n = (unsigned long long)((intmax_t)n);
+		return ((unsigned long long)va_arg(lst, intmax_t));
+	else if (params.flags[Z_MOD])
+		return ((unsigned long long)va_arg(lst, size_t));
 	else if (params.flags[LL_MOD])
-		n = (unsigned long long)n;
+		return ((unsigned long long)va_arg(lst, unsigned long long));
 	else if (params.flags[L_MOD])
-		n = (unsigned long long)((unsigned long)n);
+		return ((unsigned long long)va_arg(lst, unsigned long));
 	else if (params.flags[H_MOD])
-		n = (unsigned long long)((unsigned short)n);
+		n = (unsigned int)((unsigned short)va_arg(lst, unsigned int));
 	else if (params.flags[HH_MOD])
-		n = (unsigned long long)((unsigned char)n);
+		n = (unsigned int)((unsigned char)va_arg(lst, unsigned int));
 	else
-		n = (unsigned long long)((unsigned int)n);
-	return (n);
+		n = (unsigned int)va_arg(lst, unsigned int);
+	return ((unsigned long long)n);
 }
