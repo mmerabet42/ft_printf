@@ -5,13 +5,13 @@ CFLAGS		=	-Wall -Werror -Wextra
 _SRCS		=	ft_printf.c \
 				handler_s.c \
 				handler_d.c \
-				handler_ld.c \
-				handler_lld.c \
 				handler_u.c \
-				handler_lu.c \
-				handler_llu.c \
 				handler_p.c \
+				handler_x.c \
+				handler_o.c \
 				perform_width.c \
+				pad_zeroes.c \
+				proper_cast.c \
 
 _LIBFTSRCS=	ft_abs.c \
 			ft_atod.c \

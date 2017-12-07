@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 20:27:32 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/06 22:45:59 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/07 19:24:36 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,11 +167,16 @@ int				ft_printf(const char *format, ...)
 	if (g_printf_formats == NULL)
 	{
 		ft_printf_add_format("s", handler_s);
+		ft_printf_add_format("i", handler_d);
 		ft_printf_add_format("d", handler_d);
+		ft_printf_add_format("D", handler_d_m);
 		ft_printf_add_format("u", handler_u);
-		ft_printf_add_format("lu", handler_lu);
-		ft_printf_add_format("llu", handler_llu);
+		ft_printf_add_format("U", handler_u_m);
 		ft_printf_add_format("p", handler_p);
+		ft_printf_add_format("x", handler_x);
+		ft_printf_add_format("X", handler_x_m);
+		ft_printf_add_format("o", handler_o);
+		ft_printf_add_format("O", handler_o_m);
 	}
 	va_start(args, format);
 	len = ft_inner_printf(format, args);
