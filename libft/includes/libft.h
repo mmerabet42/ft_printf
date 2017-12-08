@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 14:00:22 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/07 15:51:41 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/08 19:04:03 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ char				**ft_strsplitstr(const char *s, const char *sep);
 int					ft_strcount(const char *s, char a);
 int					ft_strcountstr(const char *s, const char *a);
 char				*ft_strrep(const char *s, char a, char b);
+char				*ft_strrepc(char *s, char a, char b);
 char				*ft_strrepstr(const char *s, const char *a, const char *b);
 char				*ft_strrep_clr(char *s, char a, char b);
 char				*ft_strrepstr_clr(char *s, const char *a, const char *b);
@@ -186,6 +187,10 @@ t_list				*ft_lstatpos(t_list *lst, int i);
 t_list				*ft_lstfind(t_list *lst,
 							const void *content,
 							size_t content_size);
+t_list				*ft_lstfindf(t_list *lst,
+							const void *content,
+							size_t content_size,
+							t_cmpfunc cmp);
 size_t				ft_lstsize(t_list *lst);
 t_list				*ft_lstend(t_list *lst);
 t_list				*ft_lstcopy(t_list *lst);

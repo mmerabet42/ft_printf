@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 20:56:04 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/07 22:24:04 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/08 17:43:23 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ char	*handler_s(va_list lst, t_printf_params params)
 	if (!gs)
 		gs = "(null)";
 	slen = ft_strlen(gs);
-	slen = (params.precision_spec && params.precision < slen ? params.precision : slen);
+	if (params.precision_spec && params.precision < slen)
+		slen = params.precision;
 	gs = ft_strndup(gs, slen);
 	return (perform_width(gs, params));
 }

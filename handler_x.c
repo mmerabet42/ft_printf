@@ -6,11 +6,12 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:10:30 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/07 21:33:15 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/09 00:26:43 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "handlers.h"
+#include <stdio.h>
 
 char	*handler_x(va_list lst, t_printf_params params)
 {
@@ -19,7 +20,7 @@ char	*handler_x(va_list lst, t_printf_params params)
 
 	n = proper_cast_u(lst, params);
 	if (params.precision_spec && params.precision == 0 && n == 0)
-		str = ft_strdup("");
+		str = ft_strnew(0);
 	else
 		str = ft_ulltoa_cbase(n, FT_HEX);
 	if (params.flags[HASH_FLAG] && n != 0)
@@ -40,7 +41,10 @@ char	*handler_x_m(va_list lst, t_printf_params params)
 	unsigned long long	n;
 
 	n = proper_cast_u(lst, params);
-	str = ft_ulltoa_cbase(n, FT_HEXM);
+	if (params.precision_spec && params.precision == 0 && n == 0)
+		str = ft_strnew(0);
+	else
+		str = ft_ulltoa_cbase(n, FT_HEXM);
 	if (params.flags[HASH_FLAG] && n != 0)
 		params.width -= 2;
 	str = pad_zeroes(str, &params);
