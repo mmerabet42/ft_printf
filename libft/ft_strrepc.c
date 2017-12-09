@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 19:02:11 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/08 19:03:23 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/09 18:25:33 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ char	*ft_strrepc(char *s, char a, char b)
 {
 	char	*it;
 
-	it = s;
+	if (!(it = s))
+		return (NULL);
 	while (*it)
 	{
 		if (*it == a)

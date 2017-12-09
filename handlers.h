@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:01:04 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/08 17:38:40 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/09 20:21:15 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ long long			proper_cast(va_list lst, t_printf_params params);
 unsigned long long	proper_cast_u(va_list lst, t_printf_params params);
 
 char				*handler_s(va_list lst, t_printf_params params);
+char				*handler_s_m(va_list lst, t_printf_params params);
 char				*handler_d(va_list lst, t_printf_params params);
 char				*handler_d_m(va_list lst, t_printf_params params);
 char				*handler_u(va_list lst, t_printf_params params);
@@ -62,5 +63,6 @@ char				*handler_x_m(va_list lst, t_printf_params params);
 char				*handler_o(va_list lst, t_printf_params params);
 char				*handler_o_m(va_list lst, t_printf_params params);
 char				*handler_c(va_list lst, t_printf_params params);
+char				*handler_c_m(va_list lst, t_printf_params params);
 
 #endif

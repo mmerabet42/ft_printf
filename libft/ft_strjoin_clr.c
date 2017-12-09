@@ -6,44 +6,25 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 22:30:12 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/02 15:35:32 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/09 23:25:00 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static void	free_strs(char *a, char *b, int d)
-{
-	if (d == 0)
-		free(a);
-	else if (d == 1)
-		free(b);
-	else if (d == 2)
-	{
-		free(a);
-		free(b);
-	}
-}
-
+#include <stdio.h>
 char		*ft_strjoin_clr(char *a, char *b, int d)
 {
 	char	*s;
-	char	*sa;
-	char	*sb;
-	size_t	i;
 
-	sa = a;
-	sb = b;
-	if (!(s = (char *)malloc(sizeof(char) * (ft_strlen(a) + ft_strlen(b) + 1))))
+	if (!(s = ft_strnew(ft_strlen(a) + ft_strlen(b))))
 		return (NULL);
-	i = 0;
 	if (a)
-		while (*a)
-			s[i++] = *a++;
+		ft_strcat(s, a);
 	if (b)
-		while (*b)
-			s[i++] = *b++;
-	s[i] = '\0';
-	free_strs(sa, sb, d);
+		ft_strcat(s, b);
+	if (d == 2 || d == 0)
+		free(a);
+	if (d == 2 || d == 1)
+		free(b);
 	return (s);
 }

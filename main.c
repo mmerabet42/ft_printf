@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <limits.h>
 
-#define PRINTFT "{% %}"
+#define PRINTFT "s:%s C:%C d:%d p:%p x:%x %% S:%S", "bonjour ", L'該', 42, &free, 42, L"لحم خنزير"
 
 int main()
 {

@@ -6,11 +6,12 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 15:54:50 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/09 00:37:38 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/09 23:21:58 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "handlers.h"
+#include <stdio.h>
 
 char	*pad_zeroes(char *str, t_printf_params *params)
 {
@@ -28,8 +29,9 @@ char	*pad_zeroes(char *str, t_printf_params *params)
 	}
 	else if (params->flags[ZERO_FLAG] && !params->flags[MINUS_FLAG])
 		zeroes = params->width - len;
-	zeroes = (zeroes < 0 ? 0 : zeroes);
-	if (zeroes != 0)
+	if (zeroes > 0)
 		zstr = (char *)ft_memset(ft_memalloc(zeroes + 1), '0', zeroes);
+	else
+		return (str);
 	return (ft_strjoin_clr(zstr, str, 2));
 }

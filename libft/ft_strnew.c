@@ -6,13 +6,14 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 22:17:06 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/11/12 18:54:46 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/09 23:42:47 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 char	*ft_strnew(size_t size)
 {
-	return (ft_memalloc(size + 1));
+	return ((char *)ft_memalloc(size + 1));
 }
