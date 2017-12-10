@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:55:47 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/07 21:59:48 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/10 23:08:25 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*handler_o(va_list lst, t_printf_params params)
 		str = ft_strjoin_clr("0", str, 1);
 		params.width += 2;
 	}
-	str = perform_width(str, params);
+	str = perform_width(str, &params);
 	return (str);
 }
 

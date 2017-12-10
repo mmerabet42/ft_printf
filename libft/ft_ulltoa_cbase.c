@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/03 13:37:02 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/03 13:47:44 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/10 22:47:17 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,11 @@ char	*ft_ulltoa_cbase(unsigned long long n, const char *base)
 	nc = n;
 	while (nc /= baselen)
 		++i;
-	if ((str = (char *)malloc(sizeof(char) * (i + 1))) == NULL)
+	if ((str = ft_strnew(i)) == NULL)
 		return (NULL);
-	str[i] = '\0';
-	while (i >= 0)
+	while (--i >= 0)
 	{
-		str[--i] = base[ft_abs(n % baselen)];
+		str[i] = base[ft_abs(n % baselen)];
 		n /= baselen;
 	}
 	return (str);

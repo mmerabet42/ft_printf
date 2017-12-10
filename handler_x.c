@@ -6,12 +6,11 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:10:30 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/09 22:52:04 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/10 23:07:36 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "handlers.h"
-#include <stdio.h>
 
 char	*handler_x(va_list lst, t_printf_params params)
 {
@@ -31,7 +30,7 @@ char	*handler_x(va_list lst, t_printf_params params)
 		str = ft_strjoin_clr("0x", str, 1);
 		params.width += 2;
 	}
-	str = perform_width(str, params);
+	str = perform_width(str, &params);
 	return (str);
 }
 
@@ -53,6 +52,6 @@ char	*handler_x_m(va_list lst, t_printf_params params)
 		str = ft_strjoin_clr("0X", str, 1);
 		params.width += 2;
 	}
-	str = perform_width(str, params);
+	str = perform_width(str, &params);
 	return (str);
 }

@@ -6,12 +6,13 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 22:30:12 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/09 23:25:00 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/10 20:50:07 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
+
 char		*ft_strjoin_clr(char *a, char *b, int d)
 {
 	char	*s;

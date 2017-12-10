@@ -6,11 +6,56 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 16:48:04 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/07 21:59:21 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/10 23:15:53 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "handlers.h"
+
+/*long long			proper_cast(va_list lst, t_printf_params *params)
+{
+	long long	n;
+
+	n = (long long)va_arg(lst, long long);
+	if (params->flags[J_MOD])
+		n = (intmax_t)n;
+	else if (params->flags[Z_MOD])
+		n = (size_t)n;
+	else if (params->flags[LL_MOD])
+		n = (long long)n;
+	else if (params->flags[L_MOD])
+		n = (long)n;
+	else if (params->flags[H_MOD])
+		n = (short)n;
+	else if (params->flags[HH_MOD])
+		n = (char)n;
+	else
+		n = (int)n;
+	return (n);
+}
+
+unsigned long long	proper_cast_u(va_list lst, t_printf_params *params)
+{
+	unsigned long long	n;
+
+	n = (unsigned long long)va_arg(lst, unsigned long long);
+	if (params->flags[J_MOD])
+		n = (intmax_t)n;
+	else if (params->flags[Z_MOD])
+		n = (size_t)n;
+	else if (params->flags[LL_MOD])
+		n = (unsigned long long)n;
+	else if (params->flags[L_MOD])
+		n = (unsigned long)n;
+	else if (params->flags[H_MOD])
+		n = (unsigned short)n;
+	else if (params->flags[HH_MOD])
+		n = (unsigned char)n;
+	else
+		n = (unsigned int)n;
+	return (n);
+}
+*/
 
 long long			proper_cast(va_list lst, t_printf_params params)
 {

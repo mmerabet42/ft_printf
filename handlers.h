@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:01:04 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/09 20:21:15 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/10 23:19:48 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define HANDLERS_H
 
 # include "ft_printf.h"
+# include <stdio.h>
 
 enum
 {
@@ -46,7 +47,7 @@ char				*ft_handle_format(va_list lst,
 								t_printf_params params);
 char				*ft_printf_parser(const char **format, va_list lst);
 
-char				*perform_width(char *str, t_printf_params params);
+char				*perform_width(char *str, t_printf_params *params);
 char				*pad_zeroes(char *str, t_printf_params *params);
 long long			proper_cast(va_list lst, t_printf_params params);
 unsigned long long	proper_cast_u(va_list lst, t_printf_params params);
@@ -64,5 +65,6 @@ char				*handler_o(va_list lst, t_printf_params params);
 char				*handler_o_m(va_list lst, t_printf_params params);
 char				*handler_c(va_list lst, t_printf_params params);
 char				*handler_c_m(va_list lst, t_printf_params params);
+char				*handler_f(va_list lst, t_printf_params params);
 
 #endif

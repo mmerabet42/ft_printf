@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 20:27:32 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/09 23:47:10 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/10 23:16:40 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static int		ft_inner_printf(const char *format, va_list args)
 		{
 			tmp = ft_printf_parser(&format, args);
 			tmplen = ft_strlen(tmp);
-			if (ft_strrepc(tmp, -1, 0))
-				len += write(1, tmp, tmplen);
+			if (tmp)
+				len += write(1, ft_strrepc(tmp, -1, 0), tmplen);
 			free(tmp);
 		}
 		else

@@ -1,37 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handler_d.c                                        :+:      :+:    :+:   */
+/*   handler_f.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/09 20:18:02 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/10 23:22:20 by mmerabet         ###   ########.fr       */
+/*   Created: 2017/12/10 22:53:37 by mmerabet          #+#    #+#             */
+/*   Updated: 2017/12/10 23:00:23 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "handlers.h"
 
-static char	*handler_flag(char *s, int n, int l, t_printf_params params)
+static char	*handler_flag(char *s, double n, int l, t_printf_params params)
 {
 	char	adder;
 
 	adder = 0;
 	if (n < 0)
 		adder = '-';
-	else if (params.flags[PLUS_FLAG] && n >= 0)
+	else if (params->flags[PLUS_FLAG] && n >= 0)
 		adder = '+';
-	else if (params.flags[SPACE_FLAG] && n >= 0)
+	else if (params->flags[SPACE_FLAG] && n >= 0)
 		adder = ' ';
 	if (adder && adder != '-')
-		--params.width;
-	s = pad_zeroes(s, &params);
+		--params->width;
+	s = pad_zeroes(s, params);
 	if (adder && adder != '-')
-		++params.width;
-	if (adder && ((n < 0 && params.precision >= l) || n >= 0))
+		++params->width;
+	if (adder && ((n < 0 && params->precision >= l) || n >= 0))
 		s = ft_strjoincs_clr(adder, s);
-	s = perform_width(s, &params);
-	if (params.flags[ZERO_FLAG] && adder)
+	s = perform_width(s, params);
+	if (params->flags[ZERO_FLAG] && adder)
 	{
 		*ft_strchr(s, adder) = '0';
 		s[0] = adder;
@@ -41,24 +41,14 @@ static char	*handler_flag(char *s, int n, int l, t_printf_params params)
 
 char		*handler_d(va_list lst, t_printf_params params)
 {
-	long long	n;
+	double		n;
 	int			len;
 	char		*str;
 
-	n = proper_cast(lst, params);
-	if (params.precision_spec && params.precision == 0 && n == 0)
-		str = ft_strnew(0);
-	else
-		str = ft_lltoa(n);
+	n = (double)va_arg(lst, double);
+	str = ft_dtoa(n, 0);
 	len = ft_strlen(str);
-	if (n < 0 && len <= params.precision)
+	if (n < 0 && len <= params->precision)
 		str[0] = '0';
 	return (handler_flag(str, n, len, params));
-}
-
-char		*handler_d_m(va_list lst, t_printf_params params)
-{
-	params.flags[LL_MOD] = 0;
-	params.flags[L_MOD] = 1;
-	return (handler_d(lst, params));
 }

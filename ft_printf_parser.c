@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 16:03:19 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/08 18:21:23 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/10 23:22:25 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,31 @@ static int	ft_is_flag(char c, t_printf_params *params)
 	return (0);
 }
 
-static int	ft_is_precision(const char **index, t_printf_params *params)
+static int	ft_is_width(const char **index, t_printf_params *params,
+					va_list lst)
+{
+	if (ft_isdigit(**index))
+	{
+		params->width = ft_atoi(*index);
+		while (ft_isdigit(**index))
+			++(*index);
+		return (1);
+	}
+	else if (**index == '*')
+	{
+		if ((params->width = (int)va_arg(lst, int)) < 0)
+		{
+			params->width = ft_abs(params->width);
+			params->flags[MINUS_FLAG] = 1;
+		}
+		++(*index);
+		return (1);
+	}
+	return (0);
+}
+
+static int	ft_is_precision(const char **index, t_printf_params *params,
+						va_list lst)
 {
 	if (**index == '.')
 	{
@@ -37,6 +61,12 @@ static int	ft_is_precision(const char **index, t_printf_params *params)
 			params->precision = ft_atoi(*index);
 			while (ft_isdigit(**index))
 				++(*index);
+		}
+		else if (**index == '*')
+		{
+			params->precision = (int)va_arg(lst, int);
+			++(*index);
+			return (1);
 		}
 		else
 			params->precision = 0;
@@ -84,13 +114,9 @@ char		*ft_printf_parser(const char **format, va_list lst)
 	{
 		if (ft_is_flag(**format, &params))
 			++(*format);
-		else if (ft_isdigit(**format))
-		{
-			params.width = ft_atoi(*format);
-			while (ft_isdigit(**format))
-				++(*format);
-		}
-		else if (ft_is_precision(format, &params))
+		else if (ft_is_width(format, &params, lst))
+			;
+		else if (ft_is_precision(format, &params, lst))
 			;
 		else if (ft_is_modifier(format, &params))
 			;

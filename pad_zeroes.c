@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 15:54:50 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/09 23:21:58 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/10 21:52:43 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,5 @@ char	*pad_zeroes(char *str, t_printf_params *params)
 		zeroes = params->width - len;
 	if (zeroes > 0)
 		zstr = (char *)ft_memset(ft_memalloc(zeroes + 1), '0', zeroes);
-	else
-		return (str);
 	return (ft_strjoin_clr(zstr, str, 2));
 }
