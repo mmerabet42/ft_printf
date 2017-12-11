@@ -3,10 +3,12 @@
 #include <limits.h>
 #include <locale.h>
 
-#define PRINTFT "s:%s C:%c d:%d p:%p x:%x %%:%% S:%s\n", "bonjour ", 'l', 42, &free, 42, "Hello"
+#define PRINTFT "'%.4S'\n", L"我是一只猫。"
 
 int main()
 {
+	ft_printf("'%x'\n'%llk'\n", 785, "mohammed", "abcdefghijklmnopqrstuvwxyz");
+	return (0);
 	/*char *str = ft_ulltoa_cbase(789, "0123456789abcdef");
 	free(str);
 	str = "Hello ok";
@@ -20,10 +22,11 @@ int main()
 	printf("|%010.5d|\n", -12);
 	printf("|%10.5d|\n", -12);
 	printf("|%-010.5d|\n", -12);*/
-	char *frmt = "'%.*f'\n";
-	double t = 42;
-	int ftlen = ft_printf(frmt, 0, t);
-	int len = printf(frmt, 0, t);
+	setlocale(LC_ALL, "");
+	char *frmt = "'%.3C'\n";
+	unsigned long long t = 50;
+	int ftlen = ft_printf(PRINTFT);
+	int len = printf(PRINTFT);
 
 	printf("my : %d - his : %d\n", ftlen, len);
 	return (0);

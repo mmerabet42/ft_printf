@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/09 20:18:28 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/10 23:09:47 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/11 12:42:30 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ char	*handler_p(va_list lst, t_printf_params params)
 	void	*ptr;
 
 	ptr = (void *)va_arg(lst, void *);
-	str = ft_ulltoa_cbase((unsigned long long)ptr, FT_HEX);
+	if (ptr == 0 && params.precision_spec && params.precision == 0)
+		str = ft_strnew(0);
+	else
+		str = ft_ulltoa_cbase((unsigned long long)ptr, FT_HEX);
 	params.width -= 2;
 	str = pad_zeroes(str, &params);
 	params.width += 2;

@@ -6,14 +6,14 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 15:58:14 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/10 23:19:00 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/11 17:29:07 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "handlers.h"
 
-static t_list	*g_printf_formats = NULL;
-static t_list	*g_printf_last = NULL;
+static t_list			*g_printf_formats = NULL;
+static t_list			*g_printf_last = NULL;
 
 static int		formatcmp(const void *a, const void *b, size_t n)
 {

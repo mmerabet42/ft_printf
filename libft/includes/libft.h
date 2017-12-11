@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 14:00:22 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/09 18:57:59 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/11 19:51:35 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,6 +229,11 @@ t_btree				*ft_btree_leftrotate(t_btree *bt);
 t_btree				*ft_btree_rightrotate(t_btree *bt);
 t_btree				*ft_btree_balance(t_btree *bt);
 size_t				ft_btree_size(t_btree *bt);
+
+int					ft_wcharlen(wchar_t wc);
+char				*ft_getwchar(wchar_t wc);
+int					ft_wstrlen(const wchar_t *wcs);
+char				*ft_getwstr(const wchar_t *wcs);
 
 int					ft_intlen(int n);
 int					ft_longlen(long n);

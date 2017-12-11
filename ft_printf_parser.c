@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 16:03:19 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/10 23:22:25 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/11 13:00:00 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ static int	ft_is_precision(const char **index, t_printf_params *params,
 		}
 		else if (**index == '*')
 		{
-			params->precision = (int)va_arg(lst, int);
+			if ((params->precision = (int)va_arg(lst, int)) < 0)
+				params->precision_spec = 0;
 			++(*index);
 			return (1);
 		}

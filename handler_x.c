@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:10:30 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/10 23:07:36 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/11 21:05:11 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ char	*handler_x(va_list lst, t_printf_params params)
 		str = ft_strjoin_clr("0x", str, 1);
 		params.width += 2;
 	}
-	str = perform_width(str, &params);
-	return (str);
+	return (perform_width(str, &params));
 }
 
 char	*handler_x_m(va_list lst, t_printf_params params)
@@ -52,6 +51,5 @@ char	*handler_x_m(va_list lst, t_printf_params params)
 		str = ft_strjoin_clr("0X", str, 1);
 		params.width += 2;
 	}
-	str = perform_width(str, &params);
-	return (str);
+	return (perform_width(str, &params));
 }

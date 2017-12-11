@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:55:47 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/10 23:08:25 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/11 14:16:25 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,22 @@ char	*handler_o(va_list lst, t_printf_params params)
 
 	n = proper_cast_u(lst, params);
 	if (params.precision_spec && params.precision == 0 && n == 0)
-	{
-		if (params.flags[HASH_FLAG])
-			str = ft_strdup("0");
-		else
-			str = ft_strnew(0);
-	}
+		str = (params.flags[HASH_FLAG] ? ft_strdup("0") : ft_strnew(0));
 	else
 		str = ft_ulltoa_cbase(n, FT_OCT);
 	if (params.flags[HASH_FLAG] && n != 0)
-		params.width -= 2;
+	{
+		--params.width;
+		--params.precision;
+	}
 	str = pad_zeroes(str, &params);
 	if (params.flags[HASH_FLAG] && n != 0)
 	{
 		str = ft_strjoin_clr("0", str, 1);
-		params.width += 2;
+		++params.width;
+		++params.precision;
 	}
-	str = perform_width(str, &params);
-	return (str);
+	return (perform_width(str, &params));
 }
 
 char	*handler_o_m(va_list lst, t_printf_params params)

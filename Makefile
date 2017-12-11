@@ -12,6 +12,9 @@ _SRCS		=	ft_printf.c \
 				handler_x.c \
 				handler_o.c \
 				handler_c.c \
+				handler_f.c \
+				handler_b.c \
+				handler_r.c \
 				perform_width.c \
 				pad_zeroes.c \
 				proper_cast.c \
@@ -184,6 +187,10 @@ _LIBFTSRCS=	ft_abs.c \
 			ft_ulonglen.c \
 			ft_ulltoa.c \
 			ft_ultoa.c \
+			ft_wcharlen.c \
+			ft_getwchar.c \
+			ft_wstrlen.c \
+			ft_getwstr.c \
 
 SRCS_DIR	=	.
 SRCS		=	$(patsubst %,$(SRCS_DIR)/%,$(_SRCS))

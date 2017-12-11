@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:01:04 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/10 23:19:48 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/11 20:57:57 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,7 @@ char				*handler_o_m(va_list lst, t_printf_params params);
 char				*handler_c(va_list lst, t_printf_params params);
 char				*handler_c_m(va_list lst, t_printf_params params);
 char				*handler_f(va_list lst, t_printf_params params);
+char				*handler_b(va_list lst, t_printf_params params);
+char				*handler_r(va_list lst, t_printf_params params);
 
 #endif
