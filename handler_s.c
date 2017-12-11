@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 20:56:04 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/11 21:09:58 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/11 23:28:39 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*handler_s(va_list lst, t_printf_params params)
 	char	*gs;
 	int		slen;
 
+	if (params.flags[L_MOD])
+		return (handler_s_m(lst, params));
 	gs = (char *)va_arg(lst, char *);
 	if (!gs)
 		gs = "(null)";
@@ -37,11 +39,14 @@ char	*handler_s_m(va_list lst, t_printf_params params)
 	int		slen;
 
 	ws = (wchar_t *)va_arg(lst, wchar_t *);
-	gs = ft_getwstr(ws);
+	if (!(gs = ft_getwstr(ws)) && ws)
+		return (NULL);
 	if (!gs)
 		str = "(null)";
 	else
 		str = gs;
+	if (ws && params.precision_spec)
+		params.precision = ft_wstrnlen(ws, params.precision);
 	slen = ft_strlen(str);
 	if (params.precision_spec && params.precision < slen)
 		slen = params.precision;

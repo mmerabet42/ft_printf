@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 16:03:19 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/11 13:00:00 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/11 23:34:35 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,5 +124,5 @@ char		*ft_printf_parser(const char **format, va_list lst)
 		else
 			return (ft_handle_format(lst, format, params));
 	}
-	return (NULL);
+	return (ft_strnew(0));
 }

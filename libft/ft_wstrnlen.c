@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getwstr.c                                       :+:      :+:    :+:   */
+/*   ft_wstrnlen.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/11 19:27:31 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/11 22:37:00 by mmerabet         ###   ########.fr       */
+/*   Created: 2017/12/11 21:55:45 by mmerabet          #+#    #+#             */
+/*   Updated: 2017/12/11 21:56:57 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_getwstr(const wchar_t *wcs)
+int	ft_wstrnlen(const wchar_t *wstr, int n)
 {
-	char	*str;
+	int	i;
+	int	len;
 
-	str = ft_strnew(0);
-	if (!wcs)
-		return (NULL);
-	while (*wcs)
-		str = ft_strjoin_clr(str, ft_getwchar(*wcs++), 2);
-	return (str);
+	i = 0;
+	if (wstr)
+	{
+		while (*wstr)
+		{
+			len = ft_wcharlen(*wstr);
+			if (i + len > n)
+				return (i);
+			i += len;
+			++wstr;
+		}
+	}
+	return (i);
 }

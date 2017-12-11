@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 14:00:22 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/11 19:51:35 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/11 21:56:42 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,6 +233,7 @@ size_t				ft_btree_size(t_btree *bt);
 int					ft_wcharlen(wchar_t wc);
 char				*ft_getwchar(wchar_t wc);
 int					ft_wstrlen(const wchar_t *wcs);
+int					ft_wstrnlen(const wchar_t *wcs, int n);
 char				*ft_getwstr(const wchar_t *wcs);
 
 int					ft_intlen(int n);

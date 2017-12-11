@@ -6,19 +6,14 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 19:09:26 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/11 19:42:32 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/11 22:46:36 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_getwchar(wchar_t wc)
+static char	*ft_inner_getwchar(wchar_t wc, char wcs[4])
 {
-	char	wcs[4];
-
-	if (ft_wcharlen(wc) == 0)
-		return (NULL);
-	ft_bzero(wcs, 4);
 	if (wc <= 0x7F)
 		wcs[0] = (char)wc;
 	else if (wc <= 0x7FF)
@@ -40,4 +35,14 @@ char	*ft_getwchar(wchar_t wc)
 		wcs[3] = (char)((wc & 0x3F) | 0x80);
 	}
 	return (ft_strdup(wcs));
+}
+
+char		*ft_getwchar(wchar_t wc)
+{
+	char	wcs[4];
+
+	if (ft_wcharlen(wc) == 0)
+		return (NULL);
+	ft_bzero(wcs, 4);
+	return (ft_inner_getwchar(wc, wcs));
 }

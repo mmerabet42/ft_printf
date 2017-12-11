@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 20:27:32 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/11 21:09:59 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/11 23:54:48 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void		ft_printf_add_basic_formats(void)
 	ft_printf_add_format("f", handler_f);
 	ft_printf_add_format("F", handler_f);
 	ft_printf_add_format("b", handler_b);
-	ft_printf_add_format("r", handler_r);
+	ft_printf_add_format("q", handler_q);
 }
 
 static int		ft_inner_printf(const char *format, va_list args)
@@ -48,7 +48,11 @@ static int		ft_inner_printf(const char *format, va_list args)
 	{
 		if (*format == '%')
 		{
-			tmp = ft_printf_parser(&format, args);
+			if (!(tmp = ft_printf_parser(&format, args)))
+			{
+				free(buffer);
+				return (-1);
+			}
 			buffer = ft_strjoin_clr(buffer, tmp, 2);
 		}
 		else
