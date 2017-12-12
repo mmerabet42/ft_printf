@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 20:56:04 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/11 23:28:39 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/12 17:46:00 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,16 @@ char	*handler_s(va_list lst, t_printf_params params)
 	return (perform_width(gs, &params));
 }
 
+char	*get_proper_gs(wchar_t *ws, t_printf_params *params)
+{
+	if (ws && params->precision_spec)
+	{
+		params->precision = ft_wstrnlen(ws, params->precision);
+		return (ft_getnwstr(ws, params->precision));
+	}
+	return (ft_getwstr(ws));
+}
+
 char	*handler_s_m(va_list lst, t_printf_params params)
 {
 	wchar_t	*ws;
@@ -39,14 +49,12 @@ char	*handler_s_m(va_list lst, t_printf_params params)
 	int		slen;
 
 	ws = (wchar_t *)va_arg(lst, wchar_t *);
-	if (!(gs = ft_getwstr(ws)) && ws)
+	if (!(gs = get_proper_gs(ws, &params)) && ws)
 		return (NULL);
 	if (!gs)
 		str = "(null)";
 	else
 		str = gs;
-	if (ws && params.precision_spec)
-		params.precision = ft_wstrnlen(ws, params.precision);
 	slen = ft_strlen(str);
 	if (params.precision_spec && params.precision < slen)
 		slen = params.precision;

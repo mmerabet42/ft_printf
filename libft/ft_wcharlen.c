@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 19:06:55 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/12 09:50:25 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/12 18:35:33 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 int	ft_wcharlen(wchar_t c)
 {
-	if (c <= 0x7f && MB_CUR_MAX >= 1)
+	if (c < 0 || (c >= 0xd800 && c < 0xe000))
+		return (0);
+	if ((c <= 0x7f && MB_CUR_MAX >= 1) || (c <= 0xff && MB_CUR_MAX == 1))
 		return (1);
 	else if (c <= 0x7ff && MB_CUR_MAX >= 2)
 		return (2);

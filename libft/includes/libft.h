@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 14:00:22 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/11 21:56:42 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/12 15:51:01 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,6 +235,7 @@ char				*ft_getwchar(wchar_t wc);
 int					ft_wstrlen(const wchar_t *wcs);
 int					ft_wstrnlen(const wchar_t *wcs, int n);
 char				*ft_getwstr(const wchar_t *wcs);
+char				*ft_getnwstr(const wchar_t *wc, int n);
 
 int					ft_intlen(int n);
 int					ft_longlen(long n);

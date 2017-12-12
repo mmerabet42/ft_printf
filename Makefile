@@ -192,6 +192,7 @@ _LIBFTSRCS=	ft_abs.c \
 			ft_wstrlen.c \
 			ft_wstrnlen.c \
 			ft_getwstr.c \
+			ft_getnwstr.c \
 
 SRCS_DIR	=	.
 SRCS		=	$(patsubst %,$(SRCS_DIR)/%,$(_SRCS))

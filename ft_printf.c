@@ -6,13 +6,12 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 20:27:32 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/11 23:54:48 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/12 22:36:07 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "handlers.h"
-#define BUFFER_SIZE 80000
 
 static void		ft_printf_add_basic_formats(void)
 {
@@ -36,32 +35,39 @@ static void		ft_printf_add_basic_formats(void)
 	ft_printf_add_format("q", handler_q);
 }
 
+static int		write_buffer(char *buffer)
+{
+	int	len;
+
+	len = ft_strlen(buffer);
+	len = write(1, ft_strrepc(buffer, -1, 0), len);
+	free(buffer);
+	return (len);
+}
+
 static int		ft_inner_printf(const char *format, va_list args)
 {
-	char	*buffer;
-	char	*tmp;
-	int		len;
+	char	*cs[3];
 
-	len = 0;
-	buffer = NULL;
+	cs[0] = NULL;
+	cs[1] = NULL;
 	while (*format)
 	{
 		if (*format == '%')
 		{
-			if (!(tmp = ft_printf_parser(&format, args)))
+			if (!(cs[2] = ft_printf_parser(&format, args)))
 			{
-				free(buffer);
+				write_buffer(cs[0]);
+				free(cs[1]);
 				return (-1);
 			}
-			buffer = ft_strjoin_clr(buffer, tmp, 2);
+			cs[0] = ft_strjoin_clr(ft_strjoin_clr(cs[0], cs[1], 2), cs[2], 2);
+			cs[1] = NULL;
 		}
 		else
-			buffer = ft_strjoinc_clr(buffer, *format++);
+			cs[1] = ft_strjoinc_clr(cs[1], *format++);
 	}
-	len = ft_strlen(buffer);
-	write(1, ft_strrepc(buffer, -1, 0), len);
-	free(buffer);
-	return (len);
+	return (write_buffer(ft_strjoin_clr(cs[0], cs[1], 2)));
 }
 
 int				ft_printf(const char *format, ...)

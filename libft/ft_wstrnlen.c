@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 21:55:45 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/11 21:56:57 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/12 16:35:01 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,16 @@ int	ft_wstrnlen(const wchar_t *wstr, int n)
 	int	len;
 
 	i = 0;
+	len = 0;
 	if (wstr)
 	{
-		while (*wstr)
+		while (*wstr && i + len <= n)
 		{
-			len = ft_wcharlen(*wstr);
+			if ((len = ft_wcharlen(*wstr++)) == 0)
+				return (-1);
 			if (i + len > n)
 				return (i);
 			i += len;
-			++wstr;
 		}
 	}
 	return (i);
