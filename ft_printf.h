@@ -17,5 +17,7 @@
 # include <stdarg.h>
 
 int		ft_printf(const char *format, ...);
+int   ft_printf_fd(int fd, const char *format, ...);
+int   ft_printf_s(char **buffer, const char *format, ...);
 
 #endif
