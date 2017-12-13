@@ -3,6 +3,7 @@ CC			=	gcc
 CFLAGS		=	-Wall -Werror -Wextra
 
 _SRCS		=	ft_printf.c \
+				ft_vprintf.c \
 				ft_printf_parser.c \
 				ft_printf_format.c \
 				handler_s.c \
@@ -15,6 +16,7 @@ _SRCS		=	ft_printf.c \
 				handler_f.c \
 				handler_b.c \
 				handler_q.c \
+				handler_color.c \
 				perform_width.c \
 				pad_zeroes.c \
 				proper_cast.c \

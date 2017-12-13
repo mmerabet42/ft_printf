@@ -6,13 +6,13 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/10 22:53:37 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/11 13:22:14 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/13 21:34:21 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "handlers.h"
 
-static char	*handler_flag(char *s, double n, int l, t_printf_params params)
+static char	*handler_flag(char *s, long double n, int l, t_printf_params params)
 {
 	char	adder;
 
@@ -40,15 +40,15 @@ static char	*handler_flag(char *s, double n, int l, t_printf_params params)
 
 char		*handler_f(va_list lst, t_printf_params params)
 {
-	double		n;
+	long double	n;
 	int			len;
 	char		*str;
 
-	n = (double)va_arg(lst, double);
+	n = proper_cast_f(lst, params);
 	if (!params.precision_spec
 			|| (params.precision_spec && params.precision < 0))
 		params.precision = 6;
-	str = ft_dtoa(n, params.precision);
+	str = ft_ldtoa(n, params.precision);
 	len = ft_strlen(str);
 	if (n < 0 && len <= params.precision)
 		str[0] = '0';

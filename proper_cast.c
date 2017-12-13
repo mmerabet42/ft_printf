@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 16:48:04 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/11 15:03:05 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/13 20:51:55 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,11 @@ unsigned long long	proper_cast_u(va_list lst, t_printf_params params)
 	else
 		n = (unsigned int)va_arg(lst, unsigned int);
 	return ((unsigned long long)n);
+}
+
+long double			proper_cast_f(va_list lst, t_printf_params params)
+{
+	if (params.flags[LM_MOD])
+		return ((long double)va_arg(lst, long double));
+	return ((long double)va_arg(lst, double));
 }

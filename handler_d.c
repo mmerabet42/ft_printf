@@ -6,13 +6,13 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/09 20:18:02 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/11 11:58:10 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/13 21:33:54 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "handlers.h"
 
-static char	*handler_flag(char *s, int n, int l, t_printf_params params)
+static char	*handler_flag(char *s, long long n, int l, t_printf_params params)
 {
 	char	adder;
 

@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:01:04 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/11 21:21:45 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/13 23:33:00 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 enum
 {
 	PLUS_FLAG, MINUS_FLAG, HASH_FLAG, ZERO_FLAG, SPACE_FLAG,
-	L_MOD, LL_MOD, H_MOD, HH_MOD, J_MOD, T_MOD, Z_MOD,
+	L_MOD, LM_MOD, LL_MOD, H_MOD, HH_MOD, J_MOD, T_MOD, Z_MOD,
 	FLAGS_SIZE
 };
 
 typedef struct		s_printf_params
 {
-	char			*format;
+	const char		**format;
 	int				width;
 	int				precision;
 	int				precision_spec;
@@ -41,6 +41,7 @@ typedef struct		s_printf_format
 }					t_printf_format;
 
 int					ft_printf_add_format(const char *f, t_printfunc func);
+void				ft_printf_add_basic_formats(void);
 void				ft_printf_free_formats();
 char				*ft_handle_format(va_list lst,
 								const char **format,
@@ -51,6 +52,7 @@ char				*perform_width(char *str, t_printf_params *params);
 char				*pad_zeroes(char *str, t_printf_params *params);
 long long			proper_cast(va_list lst, t_printf_params params);
 unsigned long long	proper_cast_u(va_list lst, t_printf_params params);
+long double			proper_cast_f(va_list lst, t_printf_params params);
 
 char				*handler_s(va_list lst, t_printf_params params);
 char				*handler_s_m(va_list lst, t_printf_params params);
@@ -68,5 +70,6 @@ char				*handler_c_m(va_list lst, t_printf_params params);
 char				*handler_f(va_list lst, t_printf_params params);
 char				*handler_b(va_list lst, t_printf_params params);
 char				*handler_q(va_list lst, t_printf_params params);
+char				*handler_color(va_list lst, t_printf_params params);
 
 #endif

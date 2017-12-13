@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 16:03:19 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/11 23:34:35 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/13 22:44:01 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,36 +78,27 @@ static int	ft_is_precision(const char **index, t_printf_params *params,
 
 static int	ft_is_modifier(const char **index, t_printf_params *params)
 {
-	int ret;
-
-	ret = 1;
 	if (ft_strnequ("ll", *index, 2))
-	{
-		*index += 2;
-		return (params->flags[LL_MOD] = 1);
-	}
+		return (params->flags[LL_MOD] = 2);
 	else if (ft_strnequ("hh", *index, 2))
-	{
-		*index += 2;
-		return (params->flags[HH_MOD] = 1);
-	}
+		return (params->flags[HH_MOD] = 2);
 	else if (**index == 'l')
-		params->flags[L_MOD] = 1;
+		return (params->flags[L_MOD] = 1);
 	else if (**index == 'h')
-		params->flags[H_MOD] = 1;
+		return (params->flags[H_MOD] = 1);
 	else if (**index == 'j')
-		params->flags[J_MOD] = 1;
+		return (params->flags[J_MOD] = 1);
 	else if (**index == 'z')
-		params->flags[Z_MOD] = 1;
-	else
-		ret = 0;
-	*index += ret;
-	return (ret);
+		return (params->flags[Z_MOD] = 1);
+	else if (**index == 'L')
+		return (params->flags[LM_MOD] = 1);
+	return (0);
 }
 
 char		*ft_printf_parser(const char **format, va_list lst)
 {
 	t_printf_params	params;
+	int				inc_format;
 
 	ft_bzero(&params, sizeof(t_printf_params));
 	++(*format);
@@ -119,8 +110,8 @@ char		*ft_printf_parser(const char **format, va_list lst)
 			;
 		else if (ft_is_precision(format, &params, lst))
 			;
-		else if (ft_is_modifier(format, &params))
-			;
+		else if ((inc_format = ft_is_modifier(format, &params)))
+			(*format) += inc_format;
 		else
 			return (ft_handle_format(lst, format, params));
 	}
