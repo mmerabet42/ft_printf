@@ -14,7 +14,6 @@
 # define HANDLERS_H
 
 # include "ft_printf.h"
-# include <stdio.h>
 
 enum
 {

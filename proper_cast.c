@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "handlers.h"
+#include <inttypes.h>
 
 long long			proper_cast(va_list lst, t_printf_params params)
 {

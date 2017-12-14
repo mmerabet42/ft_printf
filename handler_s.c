@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "handlers.h"
+#include <wctypes.h>
 
 char	*handler_s(va_list lst, t_printf_params params)
 {

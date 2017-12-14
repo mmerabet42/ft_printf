@@ -9,7 +9,7 @@
 
 int main()
 {
-	ft_printf("Hello %{Ok people how are you ?%{endc} ok\n");
+	ft_printf("Hello ok people lol haha\n");
 
 	return (0);
 	/*int fd = open("FILETEST", O_RDWR);
