@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static char	*ft_inner_getwchar(wchar_t wc, char wcs[4])
+static char	*ft_inner_getwchar(wchar_t wc, char wcs[MB_CUR_MAX + 1])
 {
 	if ((wc <= 0x7f && MB_CUR_MAX >= 1) || (wc <= 0xff && MB_CUR_MAX == 1))
 		wcs[0] = (char)wc;
