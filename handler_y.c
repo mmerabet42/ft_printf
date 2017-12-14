@@ -6,13 +6,13 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 20:58:10 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/11 21:21:36 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/14 23:20:57 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "handlers.h"
 
-char	*handler_q(va_list lst, t_printf_params params)
+char	*handler_y(va_list lst, t_printf_params params)
 {
 	char				*str;
 	char				*base;

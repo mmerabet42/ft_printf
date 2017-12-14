@@ -9,10 +9,21 @@
 
 int main(int argc, char **argv)
 {
-	char *lol = ft_strnew(0);
-	ft_printf("Hello %s'Hello'\n", argv[1]);
+
+	ft_printf("%*{%s}%#{%s}TEST\n", ft_atoi(argv[1]), argv[2], argv[3]);
 
 	return (0);
+	/*int	i = 16;
+
+	while (i <= 21)
+		ft_printf("%0#{%d}Hello%{0}%#{green}|", i++);
+	while (i > 16)
+		ft_printf("%0#{%d}Hello%{0}%#{green}|", --i);
+	return (0);
+	char *lol = ft_strnew(0);
+	ft_printf("BEFORE %0{%s}%0{%s}'Hello'%-{} AFTER\n", argv[1], argv[2]);
+
+	return (0);*/
 	/*int fd = open("FILETEST", O_RDWR);
 	ft_printf_fd(fd, "%s%c%s", "Hello", '\n', "world");
 	return (0);

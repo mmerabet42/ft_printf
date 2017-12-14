@@ -6,6 +6,7 @@ _SRCS		=	ft_printf.c \
 				ft_vprintf.c \
 				ft_printf_parser.c \
 				ft_printf_format.c \
+				ft_init_formats.c \
 				handler_s.c \
 				handler_d.c \
 				handler_u.c \
@@ -15,7 +16,7 @@ _SRCS		=	ft_printf.c \
 				handler_c.c \
 				handler_f.c \
 				handler_b.c \
-				handler_q.c \
+				handler_y.c \
 				handler_color.c \
 				perform_width.c \
 				pad_zeroes.c \

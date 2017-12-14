@@ -6,31 +6,47 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 14:12:56 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/13 22:05:31 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/14 22:18:36 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_dtoa(double n, int precision)
+static long double	ft_ldtoa_adder(int precision)
+{
+	long double	adder;
+
+	adder = 0.05;
+	while (precision-- > 1)
+		adder /= 10;
+	return (adder);
+}
+
+static double		ft_dtoa_adder(int precision)
+{
+	double	adder;
+
+	adder = 0.05;
+	while (precision-- > 1)
+		adder /= 10;
+	return (adder);
+}
+
+char				*ft_dtoa(double n, int precision)
 {
 	long long	firstp;
 	double		secondp;
 	char		*cps[2];
 	int			kprec;
-	double		precision_adder;
 
-	kprec = precision;
+	kprec = 0;
 	firstp = (long long)n;
 	secondp = (double)(n - firstp) * (n < 0 ? -1 : 1);
 	cps[0] = ft_lltoa(firstp);
 	if (precision > 0)
 	{
 		cps[1] = ft_strnew(kprec);
-		precision_adder = 0.05;
-		while (kprec-- > 1)
-			precision_adder /= 10;
-		secondp += precision_adder;
+		secondp += ft_dtoa_adder(precision);
 		while (kprec < precision)
 		{
 			secondp *= 10;
@@ -41,25 +57,21 @@ char	*ft_dtoa(double n, int precision)
 	return (cps[0]);
 }
 
-char	*ft_ldtoa(long double n, int precision)
+char				*ft_ldtoa(long double n, int precision)
 {
 	long long	firstp;
 	long double	secondp;
 	char		*cps[2];
 	int			kprec;
-	long double	precision_adder;
 
-	kprec = precision;
+	kprec = 0;
 	firstp = (long long)n;
 	secondp = (long double)(n - firstp) * (n < 0 ? -1 : 1);
 	cps[0] = ft_lltoa(firstp);
 	if (precision > 0)
 	{
 		cps[1] = ft_strnew(kprec);
-		precision_adder = 0.05;
-		while (kprec-- > 1)
-			precision_adder /= 10;
-		secondp += precision_adder;
+		secondp += ft_ldtoa_adder(precision);
 		while (kprec < precision)
 		{
 			secondp *= 10;

@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 16:03:19 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/13 22:44:01 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/14 23:26:37 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,13 +94,15 @@ static int	ft_is_modifier(const char **index, t_printf_params *params)
 		return (params->flags[LM_MOD] = 1);
 	return (0);
 }
-
-char		*ft_printf_parser(const char **format, va_list lst)
+#include <stdio.h>
+char		*ft_printf_parser(const char **format, const char *cur_buf,
+						va_list lst)
 {
 	t_printf_params	params;
 	int				inc_format;
 
 	ft_bzero(&params, sizeof(t_printf_params));
+	params.current_buffer = cur_buf;
 	++(*format);
 	while (**format)
 	{

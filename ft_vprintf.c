@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 18:17:07 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/14 18:41:38 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/14 23:31:14 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,30 +25,30 @@ static t_ret	get_ret(char *buffer, int err)
 
 t_ret			ft_inner_printf(const char *format, va_list ap)
 {
-	char	*chars;
+	char	*cs;
 	char	*tmp;
 	t_ret	ret;
 
-	ft_printf_add_basic_formats();
-	chars = NULL;
+	ft_init_formats();
+	cs = NULL;
 	ret.buf = NULL;
 	while (*format)
 	{
 		if (*format == '%')
 		{
-			if (!(tmp = ft_printf_parser(&format, ap)))
+			if (!(tmp = ft_printf_parser(&format, ret.buf ? ret.buf : cs, ap)))
 			{
 				ret = get_ret(ret.buf, 1);
-				free(chars);
+				free(cs);
 				return (ret);
 			}
-			ret.buf = ft_strjoin_clr(ft_strjoin_clr(ret.buf, chars, 2), tmp, 2);
-			chars = NULL;
+			ret.buf = ft_strjoin_clr(ft_strjoin_clr(ret.buf, cs, 2), tmp, 2);
+			cs = NULL;
 		}
 		else
-			chars = ft_strjoinc_clr(chars, *format++);
+			cs = ft_strjoinc_clr(cs, *format++);
 	}
-	return (get_ret(ft_strjoin_clr(ret.buf, chars, 2), 0));
+	return (get_ret(ft_strjoin_clr(ret.buf, cs, 2), 0));
 }
 
 int				ft_vprintf_s(char **buffer, const char *format, va_list ap)

@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:01:04 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/14 13:04:46 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/14 23:20:46 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ enum
 typedef struct		s_printf_params
 {
 	const char		**format;
+	const char		*current_buffer;
 	int				width;
 	int				precision;
 	int				precision_spec;
@@ -40,12 +41,13 @@ typedef struct		s_printf_format
 }					t_printf_format;
 
 int					ft_printf_add_format(const char *f, t_printfunc func);
-void				ft_printf_add_basic_formats(void);
+void				ft_init_formats(void);
 void				ft_printf_free_formats();
 char				*ft_handle_format(va_list lst,
 								const char **format,
 								t_printf_params params);
-char				*ft_printf_parser(const char **format, va_list lst);
+char				*ft_printf_parser(const char **format, const char *cur_buf,
+									va_list lst);
 
 char				*perform_width(char *str, t_printf_params *params);
 char				*pad_zeroes(char *str, t_printf_params *params);
@@ -68,7 +70,8 @@ char				*handler_c(va_list lst, t_printf_params params);
 char				*handler_c_m(va_list lst, t_printf_params params);
 char				*handler_f(va_list lst, t_printf_params params);
 char				*handler_b(va_list lst, t_printf_params params);
-char				*handler_q(va_list lst, t_printf_params params);
+char				*handler_y(va_list lst, t_printf_params params);
 char				*handler_color(va_list lst, t_printf_params params);
+char				*handler_n(va_list lst, t_printf_params params);
 
 #endif
