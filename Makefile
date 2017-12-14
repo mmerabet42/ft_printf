@@ -238,4 +238,6 @@ fclean: clean
 	@echo "$(_RED)Cleaning$(_END) : $(NAME)"
 	@/bin/rm -f $(NAME)
 
-re: fclean all
+re:
+	@make fclean
+	@make all

@@ -7,9 +7,10 @@
 
 #define PRINTFT "Hello"
 
-int main()
+int main(int argc, char **argv)
 {
-	ft_printf("Hello ok people lol haha\n");
+	char *lol = ft_strnew(0);
+	ft_printf("Hello %s'Hello'\n", argv[1]);
 
 	return (0);
 	/*int fd = open("FILETEST", O_RDWR);

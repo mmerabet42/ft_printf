@@ -6,15 +6,15 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 17:38:59 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/13 18:57:08 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/14 13:15:06 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "libft.h"
 # include <stdarg.h>
+# include "libft.h"
 
 typedef struct	s_ret
 {
@@ -30,5 +30,6 @@ int				ft_printf_s(char **buffer, const char *format, ...);
 int				ft_vprintf(const char *format, va_list ap);
 int				ft_vprintf_fd(int fd, const char *format, va_list ap);
 int				ft_vprintf_s(char **buffer, const char *format, va_list ap);
+t_ret			ft_inner_printf(const char *format, va_list ap);
 
 #endif

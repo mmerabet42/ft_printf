@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 14:00:22 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/13 20:49:19 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/14 13:16:07 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ char				*ft_strjoin_clr(char *a, char *b, int d);
 char				*ft_strjoinc_clr(char *a, char b);
 char				*ft_strjoincs_clr(char a, char *b);
 char				*ft_strtrim(const char *s);
+char				*ft_strtrim_clr(char *s);
 char				**ft_strsplit(const char *s, char sep);
 char				**ft_strsplitstr(const char *s, const char *sep);
 int					ft_strcount(const char *s, char a);

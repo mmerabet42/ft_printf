@@ -6,12 +6,12 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 20:56:04 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/12 17:46:00 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/14 18:55:44 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "handlers.h"
-#include <wctypes.h>
+#include <wctype.h>
 
 char	*handler_s(va_list lst, t_printf_params params)
 {

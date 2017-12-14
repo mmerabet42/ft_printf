@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 18:17:07 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/13 22:40:06 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/14 18:41:38 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static t_ret	get_ret(char *buffer, int err)
 	return (ret);
 }
 
-static t_ret	ft_inner_printf(const char *format, va_list ap)
+t_ret			ft_inner_printf(const char *format, va_list ap)
 {
 	char	*chars;
 	char	*tmp;
