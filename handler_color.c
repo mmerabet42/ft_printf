@@ -75,6 +75,8 @@ static char	*perform_color(char *tcolor, t_printf_params params)
 		tcolor = ft_strjoin_clr(esc_fb, ft_strjoinc_clr(check(tcolor), 'm'), 1);
 	else
 		tcolor = get_color(tcolor, params.flags[HASH_FLAG]);
+	char *fbfr;
+	ft_printf_s(&fbfr, "\e[%c8;5;%sm", (params.flags[HASH_FLAG] ? '4' : '3'), 
 	return (tcolor);
 }
 

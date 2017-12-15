@@ -10,7 +10,7 @@
 int main(int argc, char **argv)
 {
 
-	ft_printf("%*{%s}%#{%s}TEST\n", ft_atoi(argv[1]), argv[2], argv[3]);
+	ft_printf("%{%s}%0#{%s}\e[40mTEST\n", argv[1], argv[2]);
 
 	return (0);
 	/*int	i = 16;
