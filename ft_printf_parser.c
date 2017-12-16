@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 16:03:19 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/14 23:26:37 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/16 20:26:57 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,22 @@ static int	ft_is_flag(char c, t_printf_params *params)
 }
 
 static int	ft_is_width(const char **index, t_printf_params *params,
-					va_list lst)
+					t_pcur *ap)
 {
+	int	t;
+
 	if (ft_isdigit(**index))
 	{
-		params->width = ft_atoi(*index);
+		t = ft_atoi(*index);
 		while (ft_isdigit(**index))
 			++(*index);
+		if (!check_dollar(index, t, ap))
+			params->width = t;
 		return (1);
 	}
 	else if (**index == '*')
 	{
-		if ((params->width = (int)va_arg(lst, int)) < 0)
+		if ((params->width = (int)va_arg(ap->ap_cur, int)) < 0)
 		{
 			params->width = ft_abs(params->width);
 			params->flags[MINUS_FLAG] = 1;
@@ -51,7 +55,7 @@ static int	ft_is_width(const char **index, t_printf_params *params,
 }
 
 static int	ft_is_precision(const char **index, t_printf_params *params,
-						va_list lst)
+						t_pcur *ap)
 {
 	if (**index == '.')
 	{
@@ -64,7 +68,7 @@ static int	ft_is_precision(const char **index, t_printf_params *params,
 		}
 		else if (**index == '*')
 		{
-			if ((params->precision = (int)va_arg(lst, int)) < 0)
+			if ((params->precision = (int)va_arg(ap->ap_cur, int)) < 0)
 				params->precision_spec = 0;
 			++(*index);
 			return (1);
@@ -94,9 +98,9 @@ static int	ft_is_modifier(const char **index, t_printf_params *params)
 		return (params->flags[LM_MOD] = 1);
 	return (0);
 }
-#include <stdio.h>
+
 char		*ft_printf_parser(const char **format, const char *cur_buf,
-						va_list lst)
+						t_pcur *ap)
 {
 	t_printf_params	params;
 	int				inc_format;
@@ -108,14 +112,14 @@ char		*ft_printf_parser(const char **format, const char *cur_buf,
 	{
 		if (ft_is_flag(**format, &params))
 			++(*format);
-		else if (ft_is_width(format, &params, lst))
+		else if (ft_is_width(format, &params, ap))
 			;
-		else if (ft_is_precision(format, &params, lst))
+		else if (ft_is_precision(format, &params, ap))
 			;
 		else if ((inc_format = ft_is_modifier(format, &params)))
 			(*format) += inc_format;
 		else
-			return (ft_handle_format(lst, format, params));
+			return (ft_handle_format(ap->ap_cur, format, params));
 	}
 	return (ft_strnew(0));
 }

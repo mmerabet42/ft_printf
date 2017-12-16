@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 14:00:22 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/14 13:16:07 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/15 19:47:07 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int					ft_strstr_pos(const char *a, const char *b);
 char				*ft_revstr(char *a);
 char				*ft_revnstr(char *a, size_t n);
 void				ft_swap(char *a, char *b);
+int					ft_strforeach(const char *s, int (*f)(char c));
 
 char				*ft_strnew(size_t size);
 void				ft_strdel(char **ap);

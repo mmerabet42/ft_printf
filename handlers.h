@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:01:04 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/14 23:20:46 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/16 21:26:57 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,9 @@ char				*ft_handle_format(va_list lst,
 								const char **format,
 								t_printf_params params);
 char				*ft_printf_parser(const char **format, const char *cur_buf,
-									va_list lst);
+									t_pcur *ap);
 
+int					check_dollar(const char **index, int n, t_pcur *ap);
 char				*perform_width(char *str, t_printf_params *params);
 char				*pad_zeroes(char *str, t_printf_params *params);
 long long			proper_cast(va_list lst, t_printf_params params);

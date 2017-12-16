@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 21:59:21 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/10 21:58:21 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/16 20:27:15 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,39 @@ char	*perform_width(char *str, t_printf_params *params)
 	else
 		s = ft_strjoin_clr(s, str, 2);
 	return (s);
+}
+
+char	*pad_zeroes(char *str, t_printf_params *params)
+{
+	int		len;
+	int		zeroes;
+	char	*zstr;
+
+	len = ft_strlen(str);
+	zeroes = 0;
+	zstr = NULL;
+	if (params->precision_spec)
+	{
+		params->flags[ZERO_FLAG] = 0;
+		zeroes = params->precision - len;
+	}
+	else if (params->flags[ZERO_FLAG] && !params->flags[MINUS_FLAG])
+		zeroes = params->width - len;
+	if (zeroes > 0)
+		zstr = (char *)ft_memset(ft_memalloc(zeroes + 1), '0', zeroes);
+	return (ft_strjoin_clr(zstr, str, 2));
+}
+
+int		check_dollar(const char **index, int n, t_pcur *ap)
+{
+	if (**index == '$')
+	{
+		va_end(ap->ap_cur);
+		va_copy(ap->ap_cur, ap->ap);
+		while (--n)
+			va_arg(ap->ap_cur, int);
+		++(*index);
+		return (1);
+	}
+	return (0);
 }

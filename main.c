@@ -5,47 +5,32 @@
 #include <wctype.h>
 #include <fcntl.h>
 
-#define PRINTFT "Hello"
+#define PRINTFT "%5$d", 1, 2, 3, 4, 5, 6, 7, 8, 9 
+
+typedef struct s_test
+{
+	unsigned long long a;
+	unsigned long long b;
+	unsigned long long c;
+	unsigned long long d;
+} t_test;
 
 int main(int argc, char **argv)
 {
+	t_test a;
+	//ft_printf("%d '%5$d'", 1, 2, 3, 4, 5, 6, 7, 8, 9);
+	//printf("'%d' '%d' '%*5$d' '%d'", 1, 2, 3, 4, 5, 6, 7, 8, 9);
 
-	ft_printf("%*{%s}%#{%s}TEST\n", ft_atoi(argv[1]), argv[2], argv[3]);
+	//printf("%5$d %d %d %1$d %d", 78, 3, "Hello world", 7, 5, 99, 1, 89, 4);
 
-	return (0);
-	/*int	i = 16;
-
-	while (i <= 21)
-		ft_printf("%0#{%d}Hello%{0}%#{green}|", i++);
-	while (i > 16)
-		ft_printf("%0#{%d}Hello%{0}%#{green}|", --i);
-	return (0);
-	char *lol = ft_strnew(0);
-	ft_printf("BEFORE %0{%s}%0{%s}'Hello'%-{} AFTER\n", argv[1], argv[2]);
-
-	return (0);*/
-	/*int fd = open("FILETEST", O_RDWR);
-	ft_printf_fd(fd, "%s%c%s", "Hello", '\n', "world");
-	return (0);
-	char *str = ft_ulltoa_cbase(789, "0123456789abcdef");
-	free(str);
-	str = "Hello ok";
-	free(str);
-	//printf("l: '%s'\n", str);
-	return (0);
-	printf("4567 |%-10]5d| plip\n", 12);
-	printf("4567 |%10]5d| plip\n", 12);
-	printf("|% 010+ d|\n", 12);
-	printf("|%-10=|\n", 12);:wq
-	printf("|%010.5d|\n", -12);
-	printf("|%10.5d|\n", -12);
-	printf("|%-010.5d|\n", -12);*/
-	//setlocale(LC_ALL, "");
+	//int	i = -1;
+	//while (i += 2 < argc)
+	//	ft_printf("%{%s}", argv[i], argv[i + 1]);
+	//ft_printf("Hello world%{eoc}");
 	ft_printf("FT_PRINTF: \n'");
 	int ftlen = ft_printf(PRINTFT);
 	printf("'\nPRINTF: \n'");
 	int len = printf(PRINTFT);
-
 	printf("'\nmy : %d - his : %d\n", ftlen, len);
 	return (0);
 }

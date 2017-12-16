@@ -19,7 +19,6 @@ _SRCS		=	ft_printf.c \
 				handler_y.c \
 				handler_color.c \
 				perform_width.c \
-				pad_zeroes.c \
 				proper_cast.c \
 
 _LIBFTSRCS=	ft_abs.c \
@@ -180,6 +179,7 @@ _LIBFTSRCS=	ft_abs.c \
 			ft_strsub.c \
 			ft_strtrim.c \
 			ft_swap.c \
+			ft_strforeach.c \
 			ft_swapptr.c \
 			ft_tobase.c \
 			ft_tolower.c \
@@ -239,6 +239,4 @@ fclean: clean
 	@echo "$(_RED)Cleaning$(_END) : $(NAME)"
 	@/bin/rm -f $(NAME)
 
-re:
-	@make fclean
-	@make all
+re: fclean all
