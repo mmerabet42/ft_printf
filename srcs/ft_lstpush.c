@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmalloc.c                                     :+:      :+:    :+:   */
+/*   ft_lstpush.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/09 22:14:01 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/10 18:08:04 by mmerabet         ###   ########.fr       */
+/*   Created: 2017/11/11 19:08:24 by mmerabet          #+#    #+#             */
+/*   Updated: 2017/12/17 18:39:46 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
-void	*ft_memalloc(size_t size)
+t_list	*ft_lstpush(t_list *lst, t_list *elem)
 {
-	void	*mem;
+	t_list	*lst_end;
 
-	if ((mem = (void *)malloc(size)))
-		ft_bzero(mem, size);
-	return (mem);
+	if ((lst_end = ft_lstend(lst)))
+		if ((lst_end->next = elem))
+			elem->parent = lst_end;
+	return (elem);
 }

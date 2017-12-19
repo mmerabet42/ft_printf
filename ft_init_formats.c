@@ -6,13 +6,13 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 22:52:10 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/16 20:34:28 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/19 15:37:02 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "handlers.h"
 
-static void		ft_init_bonuses(void)
+static void		ft_init_addon(void)
 {
 	ft_printf_add_format("f", handler_f);
 	ft_printf_add_format("F", handler_f);
@@ -20,13 +20,14 @@ static void		ft_init_bonuses(void)
 	ft_printf_add_format("y", handler_y);
 	ft_printf_add_format("{", handler_color);
 	ft_printf_add_format("n", handler_n);
+	ft_printf_add_format("r", handler_r);
 }
 
 void			ft_init_formats(void)
 {
-	static int	frst_call;
+	static int	frst_call = 0;
 
-	if (!frst_call)
+	if (frst_call == 0)
 	{
 		frst_call = 1;
 		ft_printf_add_format("s", handler_s);
@@ -43,6 +44,16 @@ void			ft_init_formats(void)
 		ft_printf_add_format("X", handler_x_m);
 		ft_printf_add_format("c", handler_c);
 		ft_printf_add_format("C", handler_c_m);
-		ft_init_bonuses();
+		ft_init_addon();
 	}
+}
+
+void			ft_init_params(t_printf_params *params, const char *cur_buf,
+							const char **format, t_pcur *ap)
+{
+	ft_bzero(params, sizeof(t_printf_params));
+	params->flags[QUERY_FLAG] = 1;
+	params->current_buffer = cur_buf;
+	params->format = format;
+	params->pcur = ap;
 }

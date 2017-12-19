@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 16:03:19 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/16 20:26:57 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/19 15:36:32 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,9 @@ char		*ft_printf_parser(const char **format, const char *cur_buf,
 {
 	t_printf_params	params;
 	int				inc_format;
+	char			*buffer;
 
-	ft_bzero(&params, sizeof(t_printf_params));
-	params.current_buffer = cur_buf;
-	++(*format);
+	ft_init_params(&params, cur_buf, format, ap);
 	while (**format)
 	{
 		if (ft_is_flag(**format, &params))
@@ -116,10 +115,15 @@ char		*ft_printf_parser(const char **format, const char *cur_buf,
 			;
 		else if (ft_is_precision(format, &params, ap))
 			;
+		else if (check_query(format, &params, ap))
+			;
 		else if ((inc_format = ft_is_modifier(format, &params)))
 			(*format) += inc_format;
 		else
-			return (ft_handle_format(ap->ap_cur, format, params));
+		{
+			buffer = ft_handle_format(ap->ap_cur, format, params);
+			return (ft_strrepeat_clr(buffer, params.flags[QUERY_FLAG]));
+		}
 	}
 	return (ft_strnew(0));
 }

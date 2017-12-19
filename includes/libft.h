@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 14:00:22 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/15 19:47:07 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/12/18 19:01:57 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct		s_list
 	void			*content;
 	size_t			content_size;
 	struct s_list	*next;
+	struct s_list	*parent;
 }					t_list;
 
 typedef struct		s_btree
@@ -46,9 +47,18 @@ void				*ft_memccpy(void *dst, const void *src, int c, size_t n);
 void				*ft_memmove(void *dst, const void *src, size_t n);
 void				*ft_memdup(const void *src, size_t n);
 void				*ft_memchr(const void *s, int c, size_t n);
+int					ft_memchr_pos(const void *s, int c, size_t n);
 int					ft_memcmp(const void *a, const void *b, size_t n);
 void				*ft_memalloc(size_t size);
 void				ft_memdel(void **ap);
+void				*ft_memjoin(const void *a,
+							size_t an,
+							const void *b,
+							size_t bn);
+void				*ft_memjoin_clr(void *a,
+							size_t an,
+							void *b,
+							size_t bn);
 
 size_t				ft_strlen(const char *s);
 char				*ft_strdup(const char *s);
@@ -72,6 +82,8 @@ char				*ft_strrstr(const char *a, const char *b);
 char				*ft_strnrstr(const char *a, const char *b, size_t n);
 int					ft_strchr_pos(const char *a, int b);
 int					ft_strstr_pos(const char *a, const char *b);
+char				*ft_strrepeat(const char *s, int n);
+char				*ft_strrepeat_clr(char *s, int n);
 char				*ft_revstr(char *a);
 char				*ft_revnstr(char *a, size_t n);
 void				ft_swap(char *a, char *b);
@@ -198,6 +210,13 @@ size_t				ft_lstsize(t_list *lst);
 t_list				*ft_lstend(t_list *lst);
 t_list				*ft_lstcopy(t_list *lst);
 t_list				*ft_lstcopyone(t_list *lst);
+t_list				*ft_lsterase(t_list **alst,
+							const void *content,
+							size_t content_size);
+t_list				*ft_lsterasef(t_list **alst,
+							const void *content,
+							size_t content_size,
+							t_cmpfunc cmp);
 
 t_btree				*ft_btree_new(const void *content, size_t content_size);
 t_btree				*ft_btree_create(const void *content, size_t content_size);

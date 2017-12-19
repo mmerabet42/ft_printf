@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd.c                                        :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/11 19:00:48 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/11/14 12:44:20 by mmerabet         ###   ########.fr       */
+/*   Created: 2017/11/23 22:48:49 by mmerabet          #+#    #+#             */
+/*   Updated: 2017/12/18 23:41:46 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# define BUFF_SIZE 64
 
-void	ft_lstadd(t_list **alst, t_list *elem)
+# include "libft.h"
+
+typedef struct	s_fd
 {
-	if (alst && elem)
-	{
-		elem->next = *alst;
-		*alst = elem;
-	}
-}
+	int			fd;
+	int			len;
+	char		buffer[BUFF_SIZE + 1];
+}				t_fd;
+
+int				get_next_line(const int fd, char **line);
+
+#endif
