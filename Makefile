@@ -92,6 +92,7 @@ all: $(NAME)
 $(NAME):
 	@echo "$(_RED)Compiling$(_END) $(NAME) $(_RED)...$(_END)"
 	@$(CC) -c $(CFLAGS) $(SRCS) -I$(ICLD)
+	@mkdir -p objs
 	@mv $(_OBJS) $(OBJD)/
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
