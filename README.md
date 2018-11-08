@@ -11,7 +11,7 @@ I am not planning to explain how the function works, but keep in mind that there
 
 ## ft_printf
 
-The function has the same working than the real one, so does its prototype
+The function has the same behavior than the standard one, so does its prototype
 ```C
 #include "libft/include/ft_printf.h"
 
