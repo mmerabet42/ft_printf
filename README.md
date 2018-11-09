@@ -2,7 +2,7 @@
 
 # A printf clone
 
-**printf** is a function for printing strings and conversion formats. It is a function from the standard library of the C language, and we had to recode it.
+**printf** is a function for printing strings and conversion formats. It is a function from the standard library of the C language, and we had to reimplement it.
 
 This project might seem useless, and it maybe is. But it is not just about reinventing the wheel. It is more about understanding more deeply how the `printf` function works.
 For someone who has never tried to understand the behind the scenes of this function he would see it as magical, and maybe that it is too hard to understand anyway. And that is wrong, it is actually easier than he thinks.
